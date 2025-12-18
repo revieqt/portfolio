@@ -81,7 +81,7 @@ export default function Contact() {
         {/* Links */}
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
           <a
-            href="mailto:josh@example.com"
+            href={`mailto:yourname@gmail.com?subject=Portfolio Inquiry&body=Hi Josh,%0D%0A%0D%0AI found your portfolio and would like to connect.`}
             className="flex items-center gap-2 px-8 py-3 bg-white text-indigo-600 rounded-lg font-semibold hover:shadow-lg transition transform hover:scale-105"
           >
             <EnvelopeIcon className="w-5 h-5" /> Send Email
