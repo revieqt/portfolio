@@ -20,7 +20,7 @@ export default function Footer() {
               </span>
             </p>
             <p className="text-xs text-gray-500 dark:text-gray-500">
-              Veni, Vidi, Vici.
+              Based in the Philippines · Open for opportunities
             </p>
           </div>
 
@@ -69,9 +69,10 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="mt-6 text-center text-xs text-gray-400 dark:text-gray-500">
-          Built with React, TypeScript, Tailwind CSS
-        </div>
+        <button onClick={() => window.open("/resume.pdf", "_blank")}
+         className="mt-6 text-center text-xs text-gray-400 dark:text-gray-500 hover:underline">
+          View Resume
+        </button>
       </div>
     </footer>
   );
