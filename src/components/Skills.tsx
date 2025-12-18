@@ -5,12 +5,24 @@ type SkillGroup = { category: string; items: SkillItem[] };
 
 const SKILLS: SkillGroup[] = [
   {
+    category: "Languages",
+    items: [
+      { name: "Javascript", percent: 90 },
+      { name: "TypeScript", percent: 85 },
+      { name: "Java", percent: 80 },
+      { name: "PHP", percent: 60 },
+      { name: "Python", percent: 35 },
+    ],
+  },
+  {
     category: "Frontend",
     items: [
-      { name: "React", percent: 90 },
-      { name: "TypeScript", percent: 85 },
-      { name: "Tailwind CSS", percent: 88 },
-      { name: "Next.js", percent: 80 },
+      { name: "HTML", percent: 90 },
+      { name: "CSS", percent: 95 },
+      { name: "Tailwind CSS", percent: 75 },
+      { name: "React", percent: 80 },
+      { name: "React Native", percent: 90 },
+      { name: "Next.js", percent: 75 },
     ],
   },
   {
@@ -18,17 +30,29 @@ const SKILLS: SkillGroup[] = [
     items: [
       { name: "Node.js", percent: 85 },
       { name: "Express", percent: 82 },
-      { name: "PostgreSQL", percent: 78 },
-      { name: "MongoDB", percent: 75 },
+      { name: "REST APIs", percent: 75 },
+      { name: "MySQL", percent: 90 },
+      { name: "MongoDB", percent: 80 },
+      { name: "Firebase", percent: 75 },
     ],
   },
   {
     category: "Tools",
     items: [
-      { name: "Git", percent: 90 },
-      { name: "Docker", percent: 70 },
-      { name: "AWS", percent: 65 },
-      { name: "CI/CD", percent: 72 },
+      { name: "Git", percent: 75 },
+      { name: "Docker", percent: 60 },
+      { name: "VS Code", percent: 90 },
+      { name: "Postman", percent: 70 },
+      { name: "Figma", percent: 80 },
+    ],
+  },
+  {
+    category: "Soft Skills",
+    items: [
+      { name: "Communication", percent: 80 },
+      { name: "Teamwork", percent: 85 },
+      { name: "Problem Solving", percent: 80 },
+      { name: "Adaptability", percent: 75 },
     ],
   },
 ];
@@ -36,15 +60,12 @@ const SKILLS: SkillGroup[] = [
 export default function Skills() {
   const [groupIndex, setGroupIndex] = useState(0);
   const [visible, setVisible] = useState(false);
-
+  const ref = useRef<HTMLDivElement>(null);
   const [categoryText, setCategoryText] = useState("");
   const [lines, setLines] = useState<
     { name: string; percent: string; bar: number }[]
   >([]);
 
-  const ref = useRef<HTMLDivElement>(null);
-
-  /* ---------------- Visibility ---------------- */
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([e]) => setVisible(e.isIntersecting),
@@ -54,7 +75,6 @@ export default function Skills() {
     return () => observer.disconnect();
   }, []);
 
-  /* ---------------- Typing Engine ---------------- */
   useEffect(() => {
     if (!visible) return;
 
@@ -68,14 +88,12 @@ export default function Skills() {
       setCategoryText("");
       setLines([]);
 
-      // Type category
       for (const char of current.category) {
         if (cancelled) return;
         setCategoryText((prev) => prev + char);
         await sleep(60);
       }
 
-      // Type each item
       for (const item of current.items) {
         if (cancelled) return;
 
@@ -139,41 +157,38 @@ export default function Skills() {
   return (
     <section
       ref={ref}
-      className="relative bg-gray-50 dark:bg-gray-900 py-20 px-6"
+      className="relative bg-gray-50 dark:bg-gray-900 py-20 px-3"
     >
       <div className="mx-auto max-w-7xl grid gap-12 lg:grid-cols-2 items-center">
-        {/* LEFT */}
-<div>
-  <h2 className="text-5xl font-bold mb-6">Skills</h2>
+        
+        <div className="px-3">
+          <h2 className="text-5xl font-bold mb-6">Skills</h2>
 
-  <p className="text-gray-600 dark:text-gray-400 max-w-md mb-8">
-    A terminal-inspired view of my technical skill set — progressive,
-    intentional, and built through real experience.
-  </p>
+          <p className="text-gray-600 dark:text-gray-400 max-w-md mb-8">
+            Every skill here tells a story of growth, exploration, and curiosity. Together, they map the journey I take from concept to execution.
+          </p>
 
-  {/* CATEGORY BUTTONS */}
-  <div className="flex flex-wrap gap-3">
-    {SKILLS.map((skill, i) => (
-      <button
-        key={skill.category}
-        onClick={() => setGroupIndex(i)}
-        className={`
-          px-4 py-2 rounded-lg font-mono text-sm transition
-          border
-          ${
-            groupIndex === i
-              ? "bg-green-500/10 text-green-400 border-green-500 shadow-[0_0_12px_rgba(34,197,94,0.35)]"
-              : "border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-green-400 hover:text-green-400"
-          }
-        `}
-      >
-        {skill.category}
-      </button>
-    ))}
-  </div>
-</div>
+          <div className="flex flex-wrap gap-3">
+            {SKILLS.map((skill, i) => (
+              <button
+                key={skill.category}
+                onClick={() => setGroupIndex(i)}
+                className={`
+                  px-4 py-2 rounded-lg font-mono text-sm transition
+                  border
+                  ${
+                    groupIndex === i
+                      ? "bg-green-500/10 text-green-400 border-green-500 shadow-[0_0_12px_rgba(34,197,94,0.35)]"
+                      : "border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-green-400 hover:text-green-400"
+                  }
+                `}
+              >
+                {skill.category}
+              </button>
+            ))}
+          </div>
+        </div>
 
-        {/* RIGHT — CONSOLE */}
         <div className="relative">
           <div className="rounded-xl bg-black p-6 font-mono text-sm text-green-400 h-[550px]">
             <div className="mb-4 flex justify-between text-xs text-green-500">
