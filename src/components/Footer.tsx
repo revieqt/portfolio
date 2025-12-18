@@ -22,6 +22,10 @@ export default function Footer() {
             <p className="text-xs text-gray-500 dark:text-gray-500">
               Based in the Philippines · Open for opportunities
             </p>
+            <button onClick={() => window.open("/resume.pdf", "_blank")}
+            className="mt-6 text-center text-xs text-gray-400 dark:text-gray-500 hover:underline align-middle mx-auto">
+              View Resume
+            </button>
           </div>
 
           {/* Social Links */}
@@ -67,12 +71,6 @@ export default function Footer() {
             </a>
           </div>
         </div>
-
-        {/* Bottom */}
-        <button onClick={() => window.open("/resume.pdf", "_blank")}
-         className="mt-6 text-center text-xs text-gray-400 dark:text-gray-500 hover:underline">
-          View Resume
-        </button>
       </div>
     </footer>
   );

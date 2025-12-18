@@ -175,8 +175,7 @@ export default function Skills() {
 
         {/* RIGHT — CONSOLE */}
         <div className="relative">
-          <div className="rounded-xl bg-black p-6 font-mono text-sm text-green-400 min-h-[300px]
-            shadow-[0_0_30px_rgba(34,197,94,0.25)]">
+          <div className="rounded-xl bg-black p-6 font-mono text-sm text-green-400 h-[550px]">
             <div className="mb-4 flex justify-between text-xs text-green-500">
               <span>&gt; skills/{categoryText}</span>
               <div className="flex gap-4">
@@ -208,7 +207,7 @@ export default function Skills() {
             </div>
           </div>
 
-          <div className="pointer-events-none absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-black/60 to-transparent rounded-b-xl" />
+          <div className="pointer-events-none absolute bottom-0 left-0 h-32 w-full bg-gradient-to-t from-gray-50 dark:from-gray-900 to-transparent" />
         </div>
       </div>
     </section>
