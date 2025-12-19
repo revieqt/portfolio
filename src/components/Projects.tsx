@@ -11,26 +11,26 @@ export default function Projects() {
 
   const projects = [
     {
-      title: "E-Commerce Platform",
-      description: "A full-featured e-commerce platform built with React and Node.js featuring real-time inventory management and payment processing.",
-      tags: ["React", "TypeScript", "Tailwind", "Node.js", "PostgreSQL"],
-      image: "src/assets/images/about_img.png",
+      title: "TaraG Travel App",
+      description: "TaraG is a smart travel companion app that helps users plan trips, navigate routes, track locations, check weather, coordinate group travel, and access emergency assistance—all in one seamless experience.",
+      tags: ["React Native", "React", "Typescript", "Node.js", "MongoDB"],
+      image: "src/assets/images/projects/tarag.jfif",
       link: "https://github.com",
       demo: "https://example.com"
     },
     {
-      title: "Task Management App",
-      description: "Collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
-      tags: ["React", "Firebase", "Tailwind", "WebSocket"],
-      image: "src/assets/images/about_img.png",
+      title: "Opswift POS",
+      description: "a POS system with built-in MIS and inventory management, designed to streamline sales, track stock in real time, generate insightful reports, and support better business decisions from one unified platform.",
+      tags: ["Java", "XAAMP", "MySQL"],
+      image: "src/assets/images/projects/opswift.jpg",
       link: "https://github.com",
       demo: "https://example.com"
     },
     {
-      title: "Data Visualization Dashboard",
-      description: "Interactive analytics dashboard with multiple chart types, real-time data updates, and customizable visualizations.",
-      tags: ["React", "Recharts", "TypeScript", "API Integration"],
-      image: "src/assets/images/about_img.png",
+      title: "NoteIt",
+      description: "NoteIt is a simple and efficient note-taking app that helps users quickly capture ideas, organize notes, and stay productive anytime, anywhere.",
+      tags: ["PHP", "Javascript", "HTML", "CSS"],
+      image: "src/assets/images/projects/noteit.PNG",
       link: "https://github.com",
       demo: "https://example.com"
     },
@@ -203,7 +203,7 @@ export default function Projects() {
                       </div>
 
                       {/* Links - Bottom */}
-                      <div className="flex gap-3">
+                      {/* <div className="flex gap-3">
                         <a
                           href={project.link}
                           className="flex items-center gap-1 px-4 py-2 bg-white/20 backdrop-blur-md text-white font-semibold text-sm rounded-lg hover:bg-white/30 transition-all duration-300 border border-white/30"
@@ -218,7 +218,7 @@ export default function Projects() {
                         >
                           Demo <ArrowTopRightOnSquareIcon className="w-3 h-3" />
                         </a>
-                      </div>
+                      </div> */}
                     </div>
                   )}
                 </div>
