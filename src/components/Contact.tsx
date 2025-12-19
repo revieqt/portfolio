@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { EnvelopeIcon } from "@heroicons/react/24/solid";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -34,70 +35,89 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 px-6 bg-gradient-to-br from-indigo-600 to-purple-600">
-      <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-5xl font-bold mb-6 text-white">Let's Work Together</h2>
-        <p className="text-xl text-indigo-100 mb-12">
-          I'm always interested in hearing about new projects and opportunities.
-        </p>
+    <section id="contact" className="relative bg-gray-50 dark:bg-gray-900 py-20 px-3">
+      <div className="mx-auto max-w-7xl grid gap-12 lg:grid-cols-2 items-center">
+        
+        <div className="px-3">
+          <h2 className="text-5xl font-bold mb-6">Get In Touch</h2>
 
-        {/* Contact Form */}
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4 mb-12 text-left bg-white rounded-lg p-8 shadow-lg max-w-xl mx-auto">
-          <input
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            value={form.name}
-            onChange={handleChange}
-            required
-            className="border p-3 rounded-lg w-full"
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Your Email"
-            value={form.email}
-            onChange={handleChange}
-            required
-            className="border p-3 rounded-lg w-full"
-          />
-          <textarea
-            name="message"
-            placeholder="Your Message"
-            value={form.message}
-            onChange={handleChange}
-            required
-            className="border p-3 rounded-lg w-full h-32"
-          />
-          <button
-            type="submit"
-            className="flex items-center justify-center gap-2 bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition transform hover:scale-105"
-          >
-            <EnvelopeIcon className="w-5 h-5" /> Send Message
-          </button>
-          {status && <p className="mt-2 text-center text-sm text-gray-700">{status}</p>}
-        </form>
+          <p className="text-gray-600 dark:text-gray-400 max-w-md mb-8">
+            I'm always interested in hearing about new projects and opportunities. Feel free to reach out!
+          </p>
 
-        {/* Links */}
-        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-          <a
-            href={`mailto:yourname@gmail.com?subject=Portfolio Inquiry&body=Hi Josh,%0D%0A%0D%0AI found your portfolio and would like to connect.`}
-            className="flex items-center gap-2 px-8 py-3 bg-white text-indigo-600 rounded-lg font-semibold hover:shadow-lg transition transform hover:scale-105"
-          >
-            <EnvelopeIcon className="w-5 h-5" /> Send Email
-          </a>
-          <a
-            href="https://github.com"
-            className="flex items-center gap-2 px-8 py-3 border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-indigo-600 transition"
-          >
-            GitHub
-          </a>
-          <a
-            href="https://linkedin.com"
-            className="flex items-center gap-2 px-8 py-3 border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-indigo-600 transition"
-          >
-            LinkedIn
-          </a>
+          <div className="flex flex-col gap-4">
+            <a
+              href="mailto:revie.dev@gmail.com"
+              className="flex items-center gap-3 text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition"
+            >
+              <EnvelopeIcon className="w-5 h-5" /> revie.dev@gmail.com
+            </a>
+            <a
+              href="https://github.com/revieqt"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition"
+            >
+              <FaGithub className="w-5 h-5" /> revieqt
+            </a>
+            <a
+              href="https://linkedin.com/in/joshua-opsima-09a3a7316"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition"
+            >
+              <FaLinkedin className="w-5 h-5" /> Joshua Opsima
+            </a>
+          </div>
+        </div>
+
+        <div className="relative">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4 bg-white dark:bg-gray-800 rounded-lg p-8 shadow-lg">
+            <div>
+              <label className="text-gray-700 dark:text-gray-300 text-sm font-semibold mb-2 block">Name</label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                value={form.name}
+                onChange={handleChange}
+                required
+                className="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-gray-900 dark:focus:ring-white transition"
+              />
+            </div>
+            <div>
+              <label className="text-gray-700 dark:text-gray-300 text-sm font-semibold mb-2 block">Email</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                value={form.email}
+                onChange={handleChange}
+                required
+                className="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-gray-900 dark:focus:ring-white transition"
+              />
+            </div>
+            <div>
+              <label className="text-gray-700 dark:text-gray-300 text-sm font-semibold mb-2 block">Message</label>
+              <textarea
+                name="message"
+                placeholder="Your Message"
+                value={form.message}
+                onChange={handleChange}
+                required
+                className="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 p-3 rounded-lg w-full h-32 focus:outline-none focus:ring-2 focus:ring-gray-900 dark:focus:ring-white transition resize-none"
+              />
+            </div>
+            <button
+              type="submit"
+              className="bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition transform hover:scale-105"
+            >
+              Send Message
+            </button>
+            {status && <p className="mt-2 text-center text-sm text-gray-700 dark:text-gray-300">{status}</p>}
+          </form>
+
+          <div className="pointer-events-none absolute bottom-0 left-0 h-32 w-full bg-gradient-to-t from-gray-50/50 dark:from-gray-900/50 to-transparent" />
         </div>
       </div>
     </section>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import heroImgLight from "@/assets/images/hero_img_light.png";
 import heroImgDark from "@/assets/images/hero_img_dark.png";
+import { FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
 
 export default function Hero() {
   const [textVisible, setTextVisible] = useState(false);
@@ -32,24 +33,39 @@ export default function Hero() {
   }`}
 >
   {/* Name container */}
-  <div className="relative inline-block text-center">
-    <h1 className="text-[10vw] sm:text-[10vw] lg:text-[10vw] font-anta font-bold uppercase tracking-widest text-gray-900 dark:text-white/90 select-none pointer-events-none">
+  <div className="relative inline-block">
+    <h1 className="text-[10vw] sm:text-[10vw] lg:text-[10vw] font-extrabold uppercase tracking-widest text-gray-900 dark:text-white/90 select-none pointer-events-none">
       Josh Opsima
     </h1>
 
-    {/* Buttons — absolutely positioned to the right of the name */}
-    <div className="transform -translate-y-1/2 flex space-x-4">
+    {/* Social Icons — positioned to the right of the name */}
+    <div className="absolute -bottom-5 right-0 flex">
       <a
-        href="#works"
-        className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white dark:text-white font-semibold rounded-lg shadow-lg transition-all duration-300"
+        href="https://instagram.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-center rounded-full text-gray-900 dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-all duration-300 hover:scale-110"
+        style={{ width: "6vw", height: "6vw", fontSize: "2.5vw", maxWidth: "120px", maxHeight: "120px",minWidth: "50px", minHeight: "50px" }}
       >
-        View Works
+        <FaInstagram />
       </a>
       <a
-        href="#contact"
-        className="px-6 py-3 bg-pink-500 hover:bg-pink-600 text-white dark:text-white font-semibold rounded-lg shadow-lg transition-all duration-300"
+        href="https://linkedin.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-center rounded-full text-gray-900 dark:text-white/90 hover:text-blue-500 dark:hover:text-blue-500 transition-all duration-300 hover:scale-110"
+        style={{ width: "6vw", height: "6vw", fontSize: "2.5vw", maxWidth: "120px", maxHeight: "120px" }}
       >
-        Contact
+        <FaLinkedin />
+      </a>
+      <a
+        href="https://github.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-center rounded-full text-gray-900 dark:text-white/90 hover:text-gray-600 dark:hover:text-gray-300 transition-all duration-300 hover:scale-110"
+        style={{ width: "6vw", height: "6vw", fontSize: "2.5vw", maxWidth: "120px", maxHeight: "120px" }}
+      >
+        <FaGithub />
       </a>
     </div>
   </div>
