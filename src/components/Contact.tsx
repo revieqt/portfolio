@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { EnvelopeIcon } from "@heroicons/react/24/solid";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { Fade } from "react-awesome-reveal";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -35,22 +36,27 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative bg-gray-50 dark:bg-gray-900 py-20 px-3">
+    <Fade direction="right">
+
+      <section id="contact" className="relative py-20 px-3">
       <div className="mx-auto max-w-7xl grid gap-12 lg:grid-cols-2 items-center">
         
         <div className="px-3">
-          <h2 className="text-5xl font-bold mb-6">Get In Touch</h2>
+          <h2 className="text-5xl font-bold mb-6 text-center lg:text-left">Get In Touch</h2>
 
-          <p className="text-gray-600 dark:text-gray-400 max-w-md mb-8">
+          <p className="text-gray-600 dark:text-gray-400 lg:max-w-md mb-8 text-center lg:text-left">
             I'm always interested in hearing about new projects and opportunities. Feel free to reach out!
           </p>
 
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-row gap-5 justify-center lg:flex-col">
             <a
               href="mailto:revie.dev@gmail.com"
               className="flex items-center gap-3 text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition"
             >
-              <EnvelopeIcon className="w-5 h-5" /> revie.dev@gmail.com
+              <EnvelopeIcon className="w-6 h-6" /> 
+              <span className="hidden lg:inline">
+                revie.dev@gmail.com
+              </span>
             </a>
             <a
               href="https://github.com/revieqt"
@@ -58,7 +64,8 @@ export default function Contact() {
               rel="noopener noreferrer"
               className="flex items-center gap-3 text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition"
             >
-              <FaGithub className="w-5 h-5" /> revieqt
+              <FaGithub className="w-6 h-6" /> 
+              <span className="hidden lg:inline">revieqt</span>
             </a>
             <a
               href="https://linkedin.com/in/joshua-opsima-09a3a7316"
@@ -66,7 +73,8 @@ export default function Contact() {
               rel="noopener noreferrer"
               className="flex items-center gap-3 text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition"
             >
-              <FaLinkedin className="w-5 h-5" /> Joshua Opsima
+              <FaLinkedin className="w-6 h-6" /> 
+              <span className="hidden lg:inline">Joshua Opsima</span>
             </a>
           </div>
         </div>
@@ -121,5 +129,7 @@ export default function Contact() {
         </div>
       </div>
     </section>
+    </Fade>
+    
   );
 }

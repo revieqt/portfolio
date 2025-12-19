@@ -156,21 +156,21 @@ export default function Skills() {
     setGroupIndex((i) => (i === 0 ? SKILLS.length - 1 : i - 1));
 
   return (
-    <Fade direction="left" triggerOnce>
+    <Fade direction="left">
       <section
         ref={ref}
-        className="relative bg-gray-50 dark:bg-gray-900 py-20 px-3"
+        className="relative py-20 px-3"
       >
         <div className="mx-auto max-w-7xl grid gap-12 lg:grid-cols-2 items-center">
           
           <div className="px-3">
-            <h2 className="text-5xl font-bold mb-6">Skills</h2>
+            <h2 className="text-5xl font-bold mb-6 text-center lg:text-left">Skills</h2>
 
-            <p className="text-gray-600 dark:text-gray-400 max-w-md mb-8">
+            <p className="text-gray-600 dark:text-gray-400 lg:max-w-md mb-8 text-center lg:text-left">
               Every skill here tells a story of growth, exploration, and curiosity. Together, they map the journey I take from concept to execution.
             </p>
 
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3 lg:justify-start justify-center">
               {SKILLS.map((skill, i) => (
                 <button
                   key={skill.category}
@@ -190,7 +190,7 @@ export default function Skills() {
               ))}
             </div>
           </div>
-
+          
           <div className="relative">
             <div className="rounded-xl bg-black p-6 font-mono text-sm text-green-400 h-[550px]">
               <div className="mb-4 flex justify-between text-xs text-green-500">
