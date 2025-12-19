@@ -159,12 +159,12 @@ export default function Skills() {
     <Fade direction="left">
       <section
         ref={ref}
-        className="relative py-20 px-3"
+        className="relative py-20 px-3 lg:h-screen overflow-hidden justify-center items-center flex"
       >
         <div className="mx-auto max-w-7xl grid gap-12 lg:grid-cols-2 items-center">
           
           <div className="px-3">
-            <h2 className="text-5xl font-bold mb-6 text-center lg:text-left">Skills</h2>
+            <h2 className="text-4xl font-extrabold mb-6 text-center lg:text-left">Skills</h2>
 
             <p className="text-gray-600 dark:text-gray-400 lg:max-w-md mb-8 text-center lg:text-left">
               Every skill here tells a story of growth, exploration, and curiosity. Together, they map the journey I take from concept to execution.

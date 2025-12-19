@@ -1,8 +1,10 @@
 import { ArrowTopRightOnSquareIcon, ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import { useState, useEffect, useRef } from "react";
+import { Fade } from "react-awesome-reveal";
 
 export default function Projects() {
   const [isAutoPlay, setIsAutoPlay] = useState(true);
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const autoPlayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const directionRef = useRef(1);
@@ -13,6 +15,7 @@ export default function Projects() {
       title: "E-Commerce Platform",
       description: "A full-featured e-commerce platform built with React and Node.js featuring real-time inventory management and payment processing.",
       tags: ["React", "TypeScript", "Tailwind", "Node.js", "PostgreSQL"],
+      image: "src/assets/images/about_img.png",
       link: "https://github.com",
       demo: "https://example.com"
     },
@@ -20,6 +23,7 @@ export default function Projects() {
       title: "Task Management App",
       description: "Collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
       tags: ["React", "Firebase", "Tailwind", "WebSocket"],
+      image: "src/assets/images/about_img.png",
       link: "https://github.com",
       demo: "https://example.com"
     },
@@ -27,6 +31,7 @@ export default function Projects() {
       title: "Data Visualization Dashboard",
       description: "Interactive analytics dashboard with multiple chart types, real-time data updates, and customizable visualizations.",
       tags: ["React", "Recharts", "TypeScript", "API Integration"],
+      image: "src/assets/images/about_img.png",
       link: "https://github.com",
       demo: "https://example.com"
     },
@@ -34,6 +39,7 @@ export default function Projects() {
       title: "Weather Forecast App",
       description: "Mobile-responsive weather application with location-based forecasts, hourly updates, and beautiful animations.",
       tags: ["React", "OpenWeather API", "Tailwind", "Geolocation"],
+      image: "src/assets/images/about_img.png",
       link: "https://github.com",
       demo: "https://example.com"
     },
@@ -104,10 +110,10 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="py-20 px-6 bg-white dark:bg-gray-900 overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-5xl font-bold text-center mb-4 text-gray-900 dark:text-white">Featured Projects</h2>
-        <p className="text-center text-gray-600 dark:text-gray-400 mb-12">Explore my latest work and innovations</p>
+    <section id="projects" className="py-20 px-6 bg-white dark:bg-gray-900 overflow-hidden h-screen">
+      <div className="max-w-7xl mx-auto h-full flex flex-col justify-center">
+        <h2 className="text-4xl font-extrabold text-center mb-4 text-gray-900 dark:text-white">Featured Projects</h2>
+        <p className="text-center text-gray-600 dark:text-gray-400 mb-8">A collection of projects that map my growth as a developer — from early experiments to more structured, scalable applications built with intention and curiosity.</p>
 
         {/* Carousel Container */}
         <div 
@@ -122,65 +128,100 @@ export default function Projects() {
           {/* Scrollable Container */}
           <div
             ref={scrollContainerRef}
-            className="flex gap-6 overflow-x-hidden pb-4 pl-32 pr-32"
+            className="flex gap-5 overflow-x-hidden py-5 pl-20 pr-20"
             style={{ scrollBehavior: "auto" }}
           >
             {projects.map((project) => (
               <div
                 key={project.title}
-                className="flex-shrink-0 w-96 group/card cursor-pointer transition-all duration-500 transform hover:scale-105"
+                className="flex-shrink-0 w-[300px] group/card cursor-pointer transition-all duration-500 transform hover:scale-105 h-[400px]"
+                onMouseEnter={() => setHoveredCard(project.title)}
+                onMouseLeave={() => setHoveredCard(null)}
               >
-                <div className="h-full p-6 bg-gradient-to-br from-white via-gray-50 to-gray-100 dark:from-gray-800 dark:via-gray-850 dark:to-gray-900 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden border border-gray-200 dark:border-gray-700">
-                  {/* Animated Gradient Orbs */}
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-indigo-500/20 to-transparent rounded-full blur-3xl -mr-32 -mt-32 animate-pulse group-hover/card:opacity-100 opacity-60 transition-opacity" />
-                  <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-purple-500/20 to-transparent rounded-full blur-3xl -ml-32 -mb-32 animate-pulse group-hover/card:opacity-100 opacity-60 transition-opacity" style={{ animationDelay: "1s" }} />
+                <div 
+                  className="h-full p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden border border-gray-200 dark:border-gray-700"
+                  style={{
+                    backgroundImage: `url('${project.image}')`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }}
+                >
+                  {/* Background Image Overlay */}
+                  <div className="absolute inset-0" />
 
-                  {/* Content */}
-                  <div className="relative z-10">
-                    <h3 className="text-2xl font-bold mb-3 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent group-hover/card:via-pink-600 transition-all">
-                      {project.title}
-                    </h3>
-                    <p className="text-gray-700 dark:text-gray-300 text-sm mb-4 leading-relaxed line-clamp-3">
-                      {project.description}
-                    </p>
+                  {/* Not Hovered State - Bottom Gradient with Title and Tags */}
+                  {hoveredCard !== project.title && (
+                    <div className="absolute inset-0 flex flex-col justify-end p-4">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                      <div className="relative z-10">
+                        <h3 className="text-xl font-bold text-white mb-3 line-clamp-2">
+                          {project.title}
+                        </h3>
+                        <div className="flex flex-wrap gap-2">
+                          {project.tags.slice(0, 2).map((tag) => (
+                            <span
+                              key={tag}
+                              className="px-3 py-1 bg-white/20 backdrop-blur-md text-white rounded-full text-xs font-semibold border border-white/30"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                          {project.tags.length > 2 && (
+                            <span className="px-3 py-1 text-white text-xs font-medium">
+                              +{project.tags.length - 2}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tags.slice(0, 3).map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-3 py-1 bg-gradient-to-r from-indigo-100 to-purple-100 dark:from-indigo-900/50 dark:to-purple-900/50 text-indigo-700 dark:text-indigo-300 rounded-full text-xs font-semibold border border-indigo-200 dark:border-indigo-800 backdrop-blur-sm"
+                  {/* Hovered State - Glassmorphism with Full Content */}
+                  {hoveredCard === project.title && (
+                    <div className="absolute inset-0 flex flex-col justify-between p-4 backdrop-blur-md bg-black/40 border border-white/20">
+                      {/* Title */}
+                      <div>
+                        <h3 className="text-xl font-bold text-white mb-4">
+                          {project.title}
+                        </h3>
+
+                        {/* Description */}
+                        <p className="text-gray-100 text-sm mb-4 leading-relaxed">
+                          {project.description}
+                        </p>
+
+                        {/* All Tags */}
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {project.tags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="px-3 py-1 bg-white/20 backdrop-blur-md text-white rounded-full text-xs font-semibold border border-white/30"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Links - Bottom */}
+                      <div className="flex gap-3">
+                        <a
+                          href={project.link}
+                          className="flex items-center gap-1 px-4 py-2 bg-white/20 backdrop-blur-md text-white font-semibold text-sm rounded-lg hover:bg-white/30 transition-all duration-300 border border-white/30"
+                          onClick={(e) => e.stopPropagation()}
                         >
-                          {tag}
-                        </span>
-                      ))}
-                      {project.tags.length > 3 && (
-                        <span className="px-3 py-1 text-gray-600 dark:text-gray-400 text-xs font-medium">
-                          +{project.tags.length - 3}
-                        </span>
-                      )}
+                          View Code <ArrowTopRightOnSquareIcon className="w-3 h-3" />
+                        </a>
+                        <a
+                          href={project.demo}
+                          className="flex items-center gap-1 px-4 py-2 bg-white/20 backdrop-blur-md text-white font-semibold text-sm rounded-lg hover:bg-white/30 transition-all duration-300 border border-white/30"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          Demo <ArrowTopRightOnSquareIcon className="w-3 h-3" />
+                        </a>
+                      </div>
                     </div>
-
-                    {/* Links */}
-                    <div className="flex gap-3">
-                      <a
-                        href={project.link}
-                        className="flex items-center gap-1 px-4 py-2 bg-gradient-to-r from-indigo-600 to-indigo-700 dark:from-indigo-500 dark:to-indigo-600 text-white font-semibold text-sm rounded-lg hover:shadow-lg hover:shadow-indigo-500/50 transition-all duration-300 transform hover:scale-105"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        View Code <ArrowTopRightOnSquareIcon className="w-3 h-3" />
-                      </a>
-                      <a
-                        href={project.demo}
-                        className="flex items-center gap-1 px-4 py-2 border-2 border-purple-600 dark:border-purple-500 text-purple-600 dark:text-purple-400 font-semibold text-sm rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/30 transition-all duration-300"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        Demo <ArrowTopRightOnSquareIcon className="w-3 h-3" />
-                      </a>
-                    </div>
-                  </div>
-
-
+                  )}
                 </div>
               </div>
             ))}

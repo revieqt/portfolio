@@ -42,7 +42,7 @@ export default function Contact() {
       <div className="mx-auto max-w-7xl grid gap-12 lg:grid-cols-2 items-center">
         
         <div className="px-3">
-          <h2 className="text-5xl font-bold mb-6 text-center lg:text-left">Get In Touch</h2>
+          <h2 className="text-4xl font-extrabold mb-6 text-center lg:text-left">Get In Touch</h2>
 
           <p className="text-gray-600 dark:text-gray-400 lg:max-w-md mb-8 text-center lg:text-left">
             I'm always interested in hearing about new projects and opportunities. Feel free to reach out!
