@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Bounce, Fade, Hinge, Slide } from "react-awesome-reveal";
+import { Fade} from "react-awesome-reveal";
 
 type SkillItem = { name: string; percent: number };
 type SkillGroup = { category: string; items: SkillItem[] };

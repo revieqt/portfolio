@@ -1,6 +1,5 @@
 import { ArrowTopRightOnSquareIcon, ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import { useState, useEffect, useRef } from "react";
-import { Fade } from "react-awesome-reveal";
 
 export default function Projects() {
   const [isAutoPlay, setIsAutoPlay] = useState(true);
