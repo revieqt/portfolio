@@ -68,7 +68,7 @@ export default function Hero() {
                 textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
             >
-              <h1 className="text-9xl ml-20 pl-8 font-extrabold uppercase tracking-widest text-gray-900 dark:text-white/90 mb-6 text-right">
+              <h1 className="text-9xl ml-20 pl-20 font-extrabold uppercase tracking-widest text-gray-900 dark:text-white/90 mb-6 text-right">
                 Josh Opsima
               </h1>
               <div className="ml-20 pl-8">
