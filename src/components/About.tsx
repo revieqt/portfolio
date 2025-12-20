@@ -28,7 +28,7 @@ export default function About() {
 
           {/* Right: Stats - Inline layout */}
           <div className="space-y-4">
-            <Fade direction="right">
+            <Fade direction="right" triggerOnce>
               <div className="flex flex-col items-center text-center gap-4 p-4 rounded-lg border border-transparent hover:border-pink-500 dark:hover:border-pink-500 transition-colors duration-300 lg:items-start lg:text-left">
                 <div className="text-2xl text-pink-500">
                   <FaCode />
@@ -44,7 +44,7 @@ export default function About() {
               </div>
             </Fade>
             
-            <Fade direction="right" delay={100}>
+            <Fade direction="right" delay={100} triggerOnce>
               <div className="flex flex-col items-center text-center gap-4 p-4 rounded-lg border border-transparent hover:border-pink-500 dark:hover:border-pink-500 transition-colors duration-300 lg:items-start lg:text-left">
                 <div className="text-2xl text-pink-500">
                   <FaClock />
@@ -63,7 +63,7 @@ export default function About() {
             
 
             {/* Clients */}
-            <Fade direction="right" delay={200}>
+            <Fade direction="right" delay={200} triggerOnce>
               <div className="flex flex-col items-center text-center gap-4 p-4 rounded-lg border border-transparent hover:border-pink-500 dark:hover:border-pink-500 transition-colors duration-300 lg:items-start lg:text-left">
                 <div className="text-2xl text-pink-500">
                   <FaUsers />
@@ -80,7 +80,7 @@ export default function About() {
             </Fade>
 
             {/* Expertise */}
-            <Fade direction="right" delay={300}>
+            <Fade direction="right" delay={300} triggerOnce>
               <div className="flex flex-col items-center text-center gap-4 p-4 rounded-lg border border-transparent hover:border-pink-500 dark:hover:border-pink-500 transition-colors duration-300 lg:items-start lg:text-left">
                 <div className="text-2xl text-pink-500">
                   <FaRocket />
