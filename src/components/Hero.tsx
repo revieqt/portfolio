@@ -92,10 +92,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-
-      
-
-      <div className="pointer-events-none absolute bottom-0 left-0 z-20 h-2/5 w-full bg-gradient-to-t from-gray-50 dark:from-gray-900 to-transparent" />
-    </section>
+  </section>
   );
 }

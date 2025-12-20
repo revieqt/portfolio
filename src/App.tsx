@@ -8,7 +8,7 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
 export default function App() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", darkMode);
