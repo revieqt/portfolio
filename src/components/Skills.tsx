@@ -142,7 +142,7 @@ export default function Skills() {
 
     run();
 
-    const auto = setTimeout(next, 10000);
+    const auto = setTimeout(next, 6000);
 
     return () => {
       cancelled = true;
