@@ -33,7 +33,7 @@ export default function Hero() {
                 Josh Opsima
               </h1>
               <p className="text-lg sm:text-xl text-gray-700 dark:text-white/75 mb-6">
-                Full-Stack Developer & Creative Thinker. Crafting beautiful and functional digital experiences with modern technology.
+                Aspiring Developer & Creative Thinker based in the Philippines.
               </p>
 
               {/* Navigation Links */}
@@ -68,12 +68,12 @@ export default function Hero() {
                 textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
             >
-              <h1 className="text-9xl font-extrabold uppercase tracking-widest text-gray-900 dark:text-white/90 mb-6 text-right">
+              <h1 className="text-9xl ml-20 pl-8 font-extrabold uppercase tracking-widest text-gray-900 dark:text-white/90 mb-6 text-right">
                 Josh Opsima
               </h1>
               <div className="ml-20 pl-8">
                 <p className="text-xl text-gray-700 dark:text-white/75 mb-8 leading-relaxed text-right">
-                  Full-Stack Developer & Creative Thinker. Crafting beautiful and functional digital experiences with modern technology.
+                  Aspiring Developer & Creative Thinker based in the Philippines.
                 </p>
 
                 {/* Navigation Links */}
