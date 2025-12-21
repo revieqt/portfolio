@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import heroImg from "@/assets/images/hero_img.png";
+import heroBg from "@/assets/images/hero_bg.png";
 
 export default function Hero() {
   const [textVisible, setTextVisible] = useState(false);
@@ -7,10 +8,10 @@ export default function Hero() {
   const [textIndex, setTextIndex] = useState(0);
 
   const textOptions = [
-    "Aspiring Developer",
-    "Creative Thinker",
-    "Keyboard Apprentice",
-    "Emerging Innovator",
+    "<> Aspiring Developer </>",
+    "<> Creative Thinker </>",
+    "<> Keyboard Apprentice </>",
+    "<> Emerging Innovator </>",
   ];
 
   useEffect(() => {
@@ -54,7 +55,11 @@ export default function Hero() {
   };
 
   return (
-    <section className="h-screen w-full">
+    <section className="h-screen w-full relative">
+      <div 
+        className="absolute inset-0 bg-cover bg-center opacity-20 grayscale"
+        style={{ backgroundImage: `url(${heroBg})` }}
+      />
       <div className="relative h-screen overflow-hidden mx-auto max-w-7xl flex items-center justify-center">
         {/* MOBILE */}
         <div className="lg:hidden relative h-full flex flex-col justify-between items-center px-4">
@@ -62,7 +67,7 @@ export default function Hero() {
             <img
               src={heroImg}
               alt="Hero"
-              className="h-full w-auto object-cover"
+              className="h-full w-auto object-cover drop-shadow-2xl"
             />
           </div>
 
@@ -80,15 +85,15 @@ export default function Hero() {
               </p>
 
               <nav className="flex justify-center gap-4 text-sm sm:text-base">
-                <a href="#about" onClick={handleNavClick} className="text-gray-500 dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">About</a>
+                <a href="#about" onClick={handleNavClick} className="text-gray-500 text-sm dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">About</a>
                 <span className="text-gray-500 dark:text-white/90">·</span>
-                <a href="#skills" onClick={handleNavClick} className="text-gray-500 dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">Skills</a>
+                <a href="#skills" onClick={handleNavClick} className="text-gray-500 text-sm dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">Skills</a>
                 <span className="text-gray-500 dark:text-white/90">·</span>
-                <a href="#certifications" onClick={handleNavClick} className="text-gray-500 dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">Certifications</a>
+                <a href="#certifications" onClick={handleNavClick} className="text-gray-500 text-sm dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">Certifications</a>
                 <span className="text-gray-500 dark:text-white/90">·</span>
-                <a href="#projects" onClick={handleNavClick} className="text-gray-500 dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">Projects</a>
+                <a href="#projects" onClick={handleNavClick} className="text-gray-500 text-sm dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">Projects</a>
                 <span className="text-gray-500 dark:text-white/90">·</span>
-                <a href="#contact" onClick={handleNavClick} className="text-gray-500 dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">Contact</a>
+                <a href="#contact" onClick={handleNavClick} className="text-gray-500 text-sm dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">Contact</a>
               </nav>
             </div>
           </div>
@@ -99,7 +104,7 @@ export default function Hero() {
             <img
               src={heroImg}
               alt="Hero"
-              className="h-full w-auto object-contain"
+              className="h-full w-auto object-contain drop-shadow-2xl"
             />
           </div>
 

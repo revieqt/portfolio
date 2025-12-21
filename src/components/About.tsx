@@ -13,7 +13,7 @@ export default function About() {
         <div className="grid lg:grid-cols-2 gap-20">
           <div className="space-y-6">
             <p className="text-base text-gray-700 dark:text-white/75 leading-relaxed text-center lg:text-left">
-              I'm a passionate full-stack developer crafting digital experiences that are both beautiful and functional.
+              I'm an aspiring developer crafting digital experiences that are both beautiful and functional.
             </p>
             <p className="text-base text-gray-700 dark:text-white/75 leading-relaxed text-center lg:text-left">
               With expertise in modern web technologies, I build responsive applications that solve real problems and delight users.
