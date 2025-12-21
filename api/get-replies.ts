@@ -1,48 +1,32 @@
-// /api/get-replies.ts
-// Polls for replies from Telegram and returns them to the browser
-
-// In-memory store for replies
-// Replies are temporarily stored and automatically cleaned up
-const replyStore: Record<string, { message: string; consumed: boolean }> = {};
+import { redis } from "../lib/redis";
 
 export default async function handler(req: any, res: any) {
   const { sessionId } = req.query;
 
+  if (!sessionId || typeof sessionId !== "string") {
+    return res.status(400).json({ error: "Missing sessionId" });
+  }
+
   if (req.method === "GET") {
-    // Client polling for replies
-    if (!sessionId || typeof sessionId !== "string") {
-      return res.status(400).json({ error: "Missing sessionId" });
+    const reply = await redis.get<string>(`reply:${sessionId}`);
+
+    if (reply) {
+      await redis.del(`reply:${sessionId}`); // consume once
+      return res.status(200).json({ reply });
     }
 
-    const storedReply = replyStore[sessionId];
-
-    if (storedReply && !storedReply.consumed) {
-      // Mark as consumed so it's not sent again
-      storedReply.consumed = true;
-      
-      // Clean up after 10 seconds to free memory
-      setTimeout(() => {
-        delete replyStore[sessionId];
-      }, 10000);
-
-      return res.status(200).json({ reply: storedReply.message });
-    }
-
-    // No new reply available
     return res.status(200).json({ reply: null });
-  } else if (req.method === "POST") {
-    // Webhook endpoint for Telegram to post replies
-    const { sessionId: bodySessionId, reply } = req.body;
+  }
 
-    if (!bodySessionId || !reply) {
-      return res.status(400).json({ error: "Missing sessionId or reply" });
+  if (req.method === "POST") {
+    const { reply } = req.body;
+
+    if (!reply) {
+      return res.status(400).json({ error: "Missing reply" });
     }
 
-    // Store the reply for this session
-    replyStore[bodySessionId] = {
-      message: reply,
-      consumed: false,
-    };
+    // Auto-expire after 1 hour
+    await redis.set(`reply:${sessionId}`, reply, { ex: 3600 });
 
     return res.status(200).json({ success: true });
   }
