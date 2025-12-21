@@ -13,13 +13,13 @@ export default function About() {
         <div className="grid lg:grid-cols-2 gap-20">
           <div className="space-y-6">
             <p className="text-base text-gray-700 dark:text-white/75 leading-relaxed text-center lg:text-left">
-              I'm an aspiring developer crafting digital experiences that are both beautiful and functional.
+              I’m a student aspiring developer with a passion for building practical, user-focused digital experiences. I enjoy turning ideas into functional applications while continuously learning new technologies and best practices.
             </p>
             <p className="text-base text-gray-700 dark:text-white/75 leading-relaxed text-center lg:text-left">
-              With expertise in modern web technologies, I build responsive applications that solve real problems and delight users.
+              As I grow my skills, I focus on writing clean code, solving real-world problems, and improving both performance and usability in every project I work on.
             </p>
             <p className="text-base text-gray-700 dark:text-white/75 leading-relaxed text-center lg:text-left">
-              When I'm not coding, I'm exploring new technologies and contributing to the developer community.
+              Focused on web and mobile development. I enjoy learning how things work behind the scenes and bringing ideas to life through code.
             </p>
           </div>
 

@@ -57,10 +57,26 @@ export default function Hero() {
   return (
     <section className="h-screen w-full relative">
       <div 
-        className="absolute inset-0 bg-cover bg-center opacity-20 grayscale"
-        style={{ backgroundImage: `url(${heroBg})` }}
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: `
+            linear-gradient(0deg, transparent 24%, rgba(128, 128, 128, 0.15) 25%, rgba(128, 128, 128, 0.15) 26%, transparent 27%, transparent 74%, rgba(128, 128, 128, 0.15) 75%, rgba(128, 128, 128, 0.15) 76%, transparent 77%, transparent),
+            linear-gradient(90deg, transparent 24%, rgba(128, 128, 128, 0.15) 25%, rgba(128, 128, 128, 0.15) 26%, transparent 27%, transparent 74%, rgba(128, 128, 128, 0.15) 75%, rgba(128, 128, 128, 0.15) 76%, transparent 77%, transparent)
+          `,
+          backgroundSize: '50px 50px'
+        }}
       />
+      
+      <div 
+        className="absolute inset-0 bg-cover bg-center opacity-25 grayscale"
+        style={{ 
+          backgroundImage: `url(${heroBg})`,
+          transform: 'skewY(10deg)'
+        }}
+      />
+      <div className="absolute bottom-0 left-0 right-0 h-4/5 bg-gradient-to-b from-transparent via-transparent to-white dark:to-gray-900 pointer-events-none z-30" />
       <div className="relative h-screen overflow-hidden mx-auto max-w-7xl flex items-center justify-center">
+
         {/* MOBILE */}
         <div className="lg:hidden relative h-full flex flex-col justify-between items-center px-4">
           <div className="absolute inset-0 flex items-center justify-center z-0 mt-20">
@@ -138,8 +154,6 @@ export default function Hero() {
             </div>
           </div>
         </div>
-
-        <div className="absolute bottom-0 left-0 right-0 h-4/5 bg-gradient-to-b from-transparent via-transparent to-white dark:to-gray-900 pointer-events-none z-30" />
       </div>
   </section>
   );
