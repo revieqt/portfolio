@@ -100,12 +100,25 @@ const Chat: React.FC<ChatProps> = ({ isOpen, onClose }) => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify([...messages, newMessage]));
 
     try {
+      // Save to Firestore
       await addDoc(collection(db, "messages"), {
         sessionId,
-        text: input, // Use consistent 'text' field
-        message: input, // Include both for compatibility
+        text: input,
+        message: input,
         from: "user",
         timestamp: Date.now(),
+      });
+
+      // Send to Telegram
+      await fetch("/api/send-message", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          sessionId,
+          message: input,
+        }),
       });
     } catch (err) {
       console.error("Failed to send message:", err);
