@@ -1,3 +1,6 @@
+// /api/telegram-webhook.ts
+// Receives replies from Telegram and stores them in Redis
+
 import { redis } from "../lib/redis";
 
 export default async function handler(req: any, res: any) {
@@ -5,36 +8,40 @@ export default async function handler(req: any, res: any) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const update = req.body;
+  try {
+    const update = req.body;
 
-  // Only handle text messages
-  const message = update?.message;
-  if (!message?.text) {
+    // Telegram sends message updates
+    if (update.message) {
+      const message = update.message;
+      const messageText = message.text || "";
+
+      // Extract session ID from message like: [session: session_xxx_xxx]
+      const sessionMatch = messageText.match(/\[session:\s*([^\]]+)\]/);
+      
+      if (sessionMatch && sessionMatch[1]) {
+        const sessionId = sessionMatch[1].trim();
+        
+        // Extract the actual reply (everything after the session ID line)
+        const replyText = messageText
+          .replace(/\[session:\s*[^\]]+\]/, "") // Remove session ID line
+          .trim();
+
+        if (replyText) {
+          // Store reply in Redis with 1 hour expiration
+          await redis.set(`reply:${sessionId}`, replyText, { ex: 3600 });
+          
+          console.log(`Stored reply for session ${sessionId}: ${replyText}`);
+          
+          return res.status(200).json({ success: true });
+        }
+      }
+    }
+
+    // Acknowledge receipt to Telegram
     return res.status(200).json({ ok: true });
+  } catch (error) {
+    console.error("Webhook error:", error);
+    return res.status(500).json({ error: "Internal server error" });
   }
-
-  const text: string = message.text;
-
-  // Extract session ID: [session: xxxx]
-  const match = text.match(/\[session:\s*(.+?)\]/i);
-  if (!match) {
-    // No session tag → ignore safely
-    return res.status(200).json({ ok: true });
-  }
-
-  const sessionId = match[1];
-
-  // Remove session tag from message
-  const cleanedText = text.replace(match[0], "").trim();
-
-  if (!cleanedText) {
-    return res.status(200).json({ ok: true });
-  }
-
-  // Store reply for browser polling
-  await redis.set(`reply:${sessionId}`, cleanedText, {
-    ex: 3600, // expire after 1 hour
-  });
-
-  return res.status(200).json({ ok: true });
 }
