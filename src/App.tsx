@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { SunIcon, MoonIcon } from "@heroicons/react/24/solid";
+import { SunIcon, MoonIcon, ChatBubbleOvalLeftIcon } from "@heroicons/react/24/solid";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Skills from "./components/Skills";
@@ -7,9 +7,12 @@ import Certifications from "./components/Certifications";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import Chat from "./components/Chat";
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(true);
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const sessionId = "user-session-uuid"; // generate dynamically per visitor
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", darkMode);
@@ -49,8 +52,18 @@ export default function App() {
 
       <div className="relative z-10">
         <button
+          onClick={() => setIsChatOpen(true)}
+          className="p-2 px-4 z-50 flex gap-2 fixed top-5 right-16 rounded-full backdrop-blur-md bg-white/10 dark:bg-white/5 hover:border hover:border-gray-400 dark:hover:border-gray-200 hover:bg-white/20 dark:hover:bg-white/10 transition shadow-lg hover:shadow-xl"
+          aria-label="Toggle dark mode"
+        >
+          <ChatBubbleOvalLeftIcon className="w-5 h-5" />
+          <p className="text-sm text-gray-700 dark:text-white/75">
+            Chat with me!
+          </p>
+        </button>
+        <button
           onClick={() => setDarkMode(!darkMode)}
-          className="p-2 z-50 fixed top-5 right-5 rounded-full border border-gray-400 dark:border-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+          className="p-2 z-50 fixed top-5 right-5 rounded-full backdrop-blur-md bg-white/10 dark:bg-white/5 hover:border hover:border-gray-400 dark:hover:border-gray-200 hover:bg-white/20 dark:hover:bg-white/10 transition shadow-lg hover:shadow-xl"
           aria-label="Toggle dark mode"
         >
           {darkMode ? <SunIcon className="w-5 h-5" /> : <MoonIcon className="w-5 h-5" />}
@@ -62,6 +75,12 @@ export default function App() {
         <Projects />
         <Contact />
         <Footer />
+
+        <Chat
+          isOpen={isChatOpen}
+          onClose={() => setIsChatOpen(false)}
+          sessionId={sessionId}
+        />
       </div>
     </div>
   );
