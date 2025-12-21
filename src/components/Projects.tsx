@@ -55,7 +55,6 @@ export default function Projects() {
       const maxScroll = container.scrollWidth - container.clientWidth;
       let currentScroll = container.scrollLeft;
       
-      // Add pause counter to allow direction change to settle
       if (pauseCounterRef.current > 0) {
         pauseCounterRef.current--;
         animationFrameId = requestAnimationFrame(autoScroll);
@@ -64,16 +63,14 @@ export default function Projects() {
 
       let newScroll = currentScroll + directionRef.current * 0.5;
 
-      // Check boundaries and reverse direction
       if (newScroll >= maxScroll) {
         directionRef.current = -1;
-        pauseCounterRef.current = 5; // Pause for 5 frames
+        pauseCounterRef.current = 5;
       } else if (newScroll <= 0) {
         directionRef.current = 1;
-        pauseCounterRef.current = 5; // Pause for 5 frames
+        pauseCounterRef.current = 5;
       }
 
-      // Clamp the value
       newScroll = Math.max(0, Math.min(newScroll, maxScroll));
       container.scrollLeft = newScroll;
       animationFrameId = requestAnimationFrame(autoScroll);
@@ -114,17 +111,14 @@ export default function Projects() {
         <h2 className="text-4xl font-extrabold text-center mb-4 text-gray-900 dark:text-white">Featured Projects</h2>
         <p className="text-center text-gray-600 dark:text-gray-400 mb-8">A collection of projects that map my growth as a developer — from early experiments to more structured, scalable applications built with intention and curiosity.</p>
 
-        {/* Carousel Container */}
         <div 
           className="relative group" 
           onMouseEnter={() => pauseAutoPlay()} 
           onMouseLeave={() => setIsAutoPlay(true)}
         >
-          {/* Fade Gradients - Left and Right */}
           <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white dark:from-gray-900 to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white dark:from-gray-900 to-transparent z-10 pointer-events-none" />
 
-          {/* Scrollable Container */}
           <div
             ref={scrollContainerRef}
             className="flex gap-5 overflow-x-hidden py-5 pl-20 pr-20"
@@ -145,10 +139,8 @@ export default function Projects() {
                     backgroundPosition: 'center',
                   }}
                 >
-                  {/* Background Image Overlay */}
                   <div className="absolute inset-0" />
 
-                  {/* Not Hovered State - Bottom Gradient with Title and Tags */}
                   {hoveredCard !== project.title && (
                     <div className="absolute inset-0 flex flex-col justify-end p-4">
                       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
@@ -175,21 +167,17 @@ export default function Projects() {
                     </div>
                   )}
 
-                  {/* Hovered State - Glassmorphism with Full Content */}
                   {hoveredCard === project.title && (
                     <div className="absolute inset-0 flex flex-col justify-between p-4 backdrop-blur-md bg-black/40 border border-white/20">
-                      {/* Title */}
                       <div>
                         <h3 className="text-xl font-bold text-white mb-4">
                           {project.title}
                         </h3>
 
-                        {/* Description */}
                         <p className="text-gray-100 text-sm mb-4 leading-relaxed">
                           {project.description}
                         </p>
 
-                        {/* All Tags */}
                         <div className="flex flex-wrap gap-2 mb-4">
                           {project.tags.map((tag) => (
                             <span
@@ -202,7 +190,6 @@ export default function Projects() {
                         </div>
                       </div>
 
-                      {/* Links - Bottom */}
                       {/* <div className="flex gap-3">
                         <a
                           href={project.link}
@@ -226,7 +213,6 @@ export default function Projects() {
             ))}
           </div>
 
-          {/* Navigation Arrows */}
           <button
             onClick={goToPrevious}
             className="absolute left-0 top-1/2 -translate-y-1/2 z-20 p-3 bg-white/90 dark:bg-gray-800/90 text-gray-900 dark:text-white rounded-full hover:bg-white dark:hover:bg-gray-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-110 backdrop-blur-md"

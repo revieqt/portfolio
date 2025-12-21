@@ -1,14 +1,16 @@
-export default {
+module.exports = {
   darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      sans: ['Poppins', 'sans-serif'],
+      anta: ['Anta', 'sans-serif'],
+      mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Courier New', 'monospace'],
+    },
     extend: {
-      fontFamily: {
-        anta: ['Anta', 'sans-serif'],
-      },
       keyframes: {
         float: {
           '0%, 100%': { transform: 'translateY(0)' },

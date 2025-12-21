@@ -104,7 +104,6 @@ export default function Skills() {
         setLines((prev) => [...prev, { name: "", percent: "", bar: 0 }]);
         const index = current.items.indexOf(item);
 
-        // Type name
         for (const char of item.name) {
           if (cancelled) return;
           name += char;
@@ -116,7 +115,6 @@ export default function Skills() {
           await sleep(35);
         }
 
-        // Type percent
         for (const char of `${item.percent}%`) {
           if (cancelled) return;
           percent += char;
@@ -128,7 +126,6 @@ export default function Skills() {
           await sleep(40);
         }
 
-        // Animate bar
         for (let i = 0; i <= item.percent; i++) {
           if (cancelled) return;
           setLines((prev) => {
@@ -158,6 +155,7 @@ export default function Skills() {
   return (
     <Fade direction="left">
       <section
+        id="skills"
         ref={ref}
         className="relative py-20 px-3 lg:h-screen overflow-hidden justify-center items-center flex"
       >

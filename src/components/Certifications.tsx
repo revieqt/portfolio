@@ -61,20 +61,15 @@ export default function Certifications() {
   ];
 
   return (
-    <section className="relative py-24 px-4 bg-white dark:bg-gray-900 overflow-hidden">
+    <section id="certifications" className="relative py-24 px-4 overflow-hidden">
 
       <div className="relative z-10 max-w-3xl mx-auto">
-        {/* Heading */}
         <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white/90 mb-16 text-center">
           Certifications & Awards
         </h2>
 
-        {/* Timeline */}
         <div className="relative">
-          {/* Timeline line */}
           <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-pink-500/50 to-purple-500/50 hidden sm:block" />
-
-          {/* Timeline items */}
           <div className="space-y-12">
             {certifications.map((yearGroup, index) => {
               const isEven = index % 2 === 0;
@@ -82,7 +77,6 @@ export default function Certifications() {
               return (
                 <Fade key={index} direction={isEven ? "right" : "left"} delay={index * 100} triggerOnce>
                   <div className={`flex ${isEven ? "sm:flex-row-reverse" : "sm:flex-row"} flex-col items-center gap-8`}>
-                    {/* Content */}
                     <div className={`w-full sm:w-1/2 ${isEven ? "sm:text-right" : "sm:text-left"} text-center`}>
                       <div className="border border-gray-200 dark:border-white/10 rounded-lg p-6 hover:border-pink-500 dark:hover:border-pink-500 transition-colors duration-300">
                         <p className="text-sm uppercase tracking-widest font-bold text-pink-500 mb-4">
@@ -106,12 +100,10 @@ export default function Certifications() {
                       </div>
                     </div>
 
-                    {/* Timeline dot - simple circle */}
                     <div className="flex-shrink-0 relative">
                       <div className="w-4 h-4 rounded-full bg-pink-500 z-10 border-4 border-white dark:border-gray-900"></div>
                     </div>
 
-                    {/* Spacer for alignment */}
                     <div className="w-full sm:w-1/2" />
                   </div>
                 </Fade>

@@ -1,23 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Anta&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Smooth scroll behavior for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
 /* Set Poppins as default font family */
 @layer base {
-  /* html {
-    @apply font-poppins;
-  }
-  
-  body {
-    @apply font-poppins bg-gray-50 text-gray-900;
-  }
-  
+  html,
+  body,
   button,
   input,
   textarea,
   select {
-    @apply font-poppins;
-  } */
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  body {
+    @apply bg-gray-50 text-gray-900;
+  }
 }
