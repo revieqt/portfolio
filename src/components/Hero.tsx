@@ -81,10 +81,10 @@ export default function Hero() {
                 Josh Opsima
               </h1>
               <p className="text-sm text-gray-700 dark:text-white/75 mb-6">
-                <span className="font-semibold font-mono text-green-500">{displayText}</span><span className="animate-pulse text-green-500">|</span> based in the Philippines.
+                <span className="font-semibold font-mono text-green-500">{displayText}</span><span className="animate-pulse text-green-500">|</span>
               </p>
 
-              <nav className="flex justify-center gap-4 text-sm sm:text-base">
+              <nav className="flex flex-wrap justify-center gap-4 text-sm sm:text-base">
                 <a href="#about" onClick={handleNavClick} className="text-gray-500 text-sm dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">About</a>
                 <span className="text-gray-500 dark:text-white/90">·</span>
                 <a href="#skills" onClick={handleNavClick} className="text-gray-500 text-sm dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">Skills</a>
@@ -95,6 +95,7 @@ export default function Hero() {
                 <span className="text-gray-500 dark:text-white/90">·</span>
                 <a href="#contact" onClick={handleNavClick} className="text-gray-500 text-sm dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">Contact</a>
               </nav>
+              
             </div>
           </div>
         </div>
