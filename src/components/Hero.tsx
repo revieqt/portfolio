@@ -93,11 +93,11 @@ export default function Hero() {
                 textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
             >
-              <h1 className="text-4xl sm:text-5xl font-extrabold uppercase tracking-widest text-gray-900 dark:text-white/90 mb-4">
+              <h1 className="text-5xl font-extrabold uppercase tracking-widest text-gray-900 dark:text-white/90 mb-4">
                 Josh Opsima
               </h1>
-              <p className="text-sm text-gray-700 dark:text-white/75 mb-6">
-                <span className="font-semibold font-mono text-green-500">{displayText}</span><span className="animate-pulse text-green-500">|</span>
+              <p className="text-lg text-gray-700 dark:text-white/75 mb-4">
+                <span className="font-semibold font-mono text-green-600">{displayText}</span><span className="animate-pulse text-green-500">|</span>
               </p>
 
               <nav className="flex flex-wrap justify-center gap-4 text-sm sm:text-base">
