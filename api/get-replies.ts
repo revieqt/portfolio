@@ -3,6 +3,10 @@ import { redis } from "../lib/redis";
 export default async function handler(req: any, res: any) {
   const { sessionId } = req.query;
 
+  console.log("Redis URL:", process.env.UPSTASH_REDIS_REST_URL);
+console.log("Redis Token:", process.env.UPSTASH_REDIS_REST_TOKEN);
+
+
   if (!sessionId || typeof sessionId !== "string") {
     return res.status(400).json({ error: "Missing sessionId" });
   }
