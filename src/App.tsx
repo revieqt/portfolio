@@ -12,7 +12,6 @@ import Chat from "./components/Chat";
 export default function App() {
   const [darkMode, setDarkMode] = useState(true);
   const [isChatOpen, setIsChatOpen] = useState(false);
-  const sessionId = "user-session-uuid"; // generate dynamically per visitor
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", darkMode);
@@ -79,7 +78,6 @@ export default function App() {
         <Chat
           isOpen={isChatOpen}
           onClose={() => setIsChatOpen(false)}
-          sessionId={sessionId}
         />
       </div>
     </div>
