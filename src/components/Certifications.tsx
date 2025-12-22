@@ -62,6 +62,13 @@ export default function Certifications() {
 
   return (
     <section id="certifications" className="relative py-24 px-4 overflow-hidden">
+      <style>
+        {`
+          .glow-green:hover {
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.6), inset 0 0 20px rgba(34, 197, 94, 0.1);
+          }
+        `}
+      </style>
 
       <div className="relative z-10 max-w-3xl mx-auto">
         <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white/90 mb-16 text-center">
@@ -69,7 +76,7 @@ export default function Certifications() {
         </h2>
 
         <div className="relative">
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-pink-500/50 to-purple-500/50 hidden sm:block" />
+          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-teal-500/50 to-cyan-500/50 hidden sm:block" />
           <div className="space-y-12">
             {certifications.map((yearGroup, index) => {
               const isEven = index % 2 === 0;
@@ -78,8 +85,8 @@ export default function Certifications() {
                 <Fade key={index} direction={isEven ? "right" : "left"} delay={index * 100} triggerOnce>
                   <div className={`flex ${isEven ? "sm:flex-row-reverse" : "sm:flex-row"} flex-col items-center gap-8`}>
                     <div className={`w-full sm:w-1/2 ${isEven ? "sm:text-right" : "sm:text-left"} text-center`}>
-                      <div className="border border-gray-200 dark:border-white/10 rounded-lg p-6 hover:border-pink-500 dark:hover:border-pink-500 transition-colors duration-300">
-                        <p className="text-sm uppercase tracking-widest font-bold text-pink-500 mb-4">
+                      <div className="glow-green border border-gray-200 dark:border-white/10 rounded-lg p-6 hover:border-green-500 dark:hover:border-green-500 transition-all duration-300">
+                        <p className="text-sm uppercase tracking-widest font-bold text-green-500 mb-4">
                           {yearGroup.year}
                         </p>
                         <div className="space-y-4">
@@ -101,7 +108,7 @@ export default function Certifications() {
                     </div>
 
                     <div className="flex-shrink-0 relative">
-                      <div className="w-4 h-4 rounded-full bg-pink-500 z-10 border-4 border-white dark:border-gray-900"></div>
+                      <div className="w-4 h-4 rounded-full bg-green-500 z-10 border-4 border-white dark:border-gray-900"></div>
                     </div>
 
                     <div className="w-full sm:w-1/2" />

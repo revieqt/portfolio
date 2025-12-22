@@ -4,11 +4,13 @@ import { FaCode, FaClock, FaUsers, FaRocket } from "react-icons/fa";
 export default function About() {
   return (
     <section id="about" className="relative py-24 px-4 bg-white dark:bg-gray-900 overflow-hidden">
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-1/3 -right-40 w-80 h-80 bg-pink-500/10 rounded-full blur-3xl animate-glow-slow" />
-        <div className="absolute bottom-1/3 -left-40 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-glower" />
-      </div>
-
+      <style>
+        {`
+          .glow-green:hover {
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.6), inset 0 0 20px rgba(34, 197, 94, 0.1);
+          }
+        `}
+      </style>
       <div className="relative z-10 max-w-6xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-20">
           <div className="space-y-6">
@@ -25,8 +27,8 @@ export default function About() {
 
           <div className="space-y-4">
             <Fade direction="right" triggerOnce>
-              <div className="flex flex-col items-center text-center gap-4 p-4 rounded-lg border border-transparent hover:border-pink-500 dark:hover:border-pink-500 transition-colors duration-300 lg:items-start lg:text-left">
-                <div className="text-2xl text-pink-500">
+              <div className="glow-green flex flex-col items-center text-center gap-4 p-4 rounded-lg border border-transparent hover:border-green-500 dark:hover:border-green-500 transition-all duration-300 lg:items-start lg:text-left">
+                <div className="text-2xl text-green-500">
                   <FaCode />
                 </div>
                 <div>
@@ -41,8 +43,8 @@ export default function About() {
             </Fade>
             
             <Fade direction="right" delay={100} triggerOnce>
-              <div className="flex flex-col items-center text-center gap-4 p-4 rounded-lg border border-transparent hover:border-pink-500 dark:hover:border-pink-500 transition-colors duration-300 lg:items-start lg:text-left">
-                <div className="text-2xl text-pink-500">
+              <div className="glow-green flex flex-col items-center text-center gap-4 p-4 rounded-lg border border-transparent hover:border-green-500 dark:hover:border-green-500 transition-all duration-300 lg:items-start lg:text-left">
+                <div className="text-2xl text-green-500">
                   <FaClock />
                 </div>
                 <div>
@@ -56,8 +58,8 @@ export default function About() {
               </div>
             </Fade>
             <Fade direction="right" delay={200} triggerOnce>
-              <div className="flex flex-col items-center text-center gap-4 p-4 rounded-lg border border-transparent hover:border-pink-500 dark:hover:border-pink-500 transition-colors duration-300 lg:items-start lg:text-left">
-                <div className="text-2xl text-pink-500">
+              <div className="glow-green flex flex-col items-center text-center gap-4 p-4 rounded-lg border border-transparent hover:border-green-500 dark:hover:border-green-500 transition-all duration-300 lg:items-start lg:text-left">
+                <div className="text-2xl text-green-500">
                   <FaUsers />
                 </div>
                 <div>
@@ -72,8 +74,8 @@ export default function About() {
             </Fade>
 
             <Fade direction="right" delay={300} triggerOnce>
-              <div className="flex flex-col items-center text-center gap-4 p-4 rounded-lg border border-transparent hover:border-pink-500 dark:hover:border-pink-500 transition-colors duration-300 lg:items-start lg:text-left">
-                <div className="text-2xl text-pink-500">
+              <div className="glow-green flex flex-col items-center text-center gap-4 p-4 rounded-lg border border-transparent hover:border-green-500 dark:hover:border-green-500 transition-all duration-300 lg:items-start lg:text-left">
+                <div className="text-2xl text-green-500">
                   <FaRocket />
                 </div>
                 <div>
@@ -89,21 +91,6 @@ export default function About() {
           </div>
         </div>
       </div>
-
-      <style>
-        {`
-          @keyframes glow-slow {
-            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
-            50% { transform: translate(20px, -10px) scale(1.05); opacity: 0.9; }
-          }
-          @keyframes glow-slower {
-            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
-            50% { transform: translate(-15px, 15px) scale(1.1); opacity: 0.8; }
-          }
-          .animate-glow-slow { animation: glow-slow 8s ease-in-out infinite; }
-          .animate-glower { animation: glow-slower 12s ease-in-out infinite; }
-        `}
-      </style>
     </section>
   );
 }

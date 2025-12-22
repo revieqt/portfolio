@@ -6,6 +6,7 @@ export default function Hero() {
   const [textVisible, setTextVisible] = useState(false);
   const [displayText, setDisplayText] = useState("");
   const [textIndex, setTextIndex] = useState(0);
+  const [scrollY, setScrollY] = useState(0);
 
   const textOptions = [
     "<> Aspiring Developer </>",
@@ -16,6 +17,15 @@ export default function Hero() {
 
   useEffect(() => {
     setTextVisible(true);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
@@ -56,6 +66,35 @@ export default function Hero() {
 
   return (
     <section className="h-screen w-full relative">
+      <style>
+        {`
+        @keyframes meshDrift {
+          0% {
+            background-position: 0% 0%, 100% 100%, 50% 50%;
+          }
+          50% {
+            background-position: 100% 50%, 0% 50%, 50% 100%;
+          }
+          100% {
+            background-position: 0% 0%, 100% 100%, 50% 50%;
+          }
+        }
+        `}
+      </style>
+
+      <div
+        className="absolute inset-0 z-0 bg-white dark:bg-gray-900"
+        style={{
+          backgroundImage: `
+            radial-gradient(at 20% 30%, rgba(45,212,191,0.45), transparent 55%),
+            radial-gradient(at 80% 20%, rgba(34,211,238,0.45), transparent 55%),
+            radial-gradient(at 50% 80%, rgba(52,211,153,0.45), transparent 55%)
+          `,
+          backgroundSize: "220% 220%",
+          animation: "meshDrift 40s ease-in-out infinite",
+        }}
+      />
+
       <div 
         className="absolute inset-0 z-0"
         style={{
@@ -68,13 +107,13 @@ export default function Hero() {
       />
       
       <div 
-        className="absolute inset-0 bg-cover bg-center opacity-25 grayscale"
+        className="absolute inset-0 z-0 bg-cover bg-center opacity-25 grayscale"
         style={{ 
           backgroundImage: `url(${heroBg})`,
-          transform: 'skewY(10deg)'
+          transform: `skewY(10deg) translateY(${scrollY * 0.15}px)`
         }}
       />
-      <div className="absolute bottom-0 left-0 right-0 h-4/5 bg-gradient-to-b from-transparent via-transparent to-white dark:to-gray-900 pointer-events-none z-30" />
+      <div className="absolute bottom-0 left-0 right-0 h-[100%] bg-gradient-to-b from-transparent via-transparent to-white dark:to-gray-900 pointer-events-none z-30" />
       <div className="relative h-screen overflow-hidden mx-auto max-w-7xl flex items-center justify-center">
 
         {/* MOBILE */}
@@ -87,7 +126,7 @@ export default function Hero() {
             />
           </div>
 
-          <div className="relative z-50 mt-auto mb-16 text-center px-4">
+          <div className="relative z-50 mt-auto mb-20 text-center px-4">
             <div
               className={`transition-all duration-1000 ease-out ${
                 textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
