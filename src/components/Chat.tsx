@@ -1,19 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { IoMdClose } from "react-icons/io";
-import { db } from "../../lib/firebase";
-import {
-  collection,
-  addDoc,
-  query,
-  where,
-  orderBy,
-  onSnapshot,
-} from "firebase/firestore";
 
 type Message = {
   id: string;
   text: string;
-  from: "user" | "you";
+  from: "user" | "ai";
   timestamp: number;
 };
 
@@ -23,27 +14,21 @@ type ChatProps = {
 };
 
 const STORAGE_KEY = "chat_messages";
-const SESSION_KEY = "chat_sessionId";
-const RATE_LIMIT_MS = 3000;
+const RATE_LIMIT_MS = 1000;
 
 const Chat: React.FC<ChatProps> = ({ isOpen, onClose }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
-  const [sessionId, setSessionId] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
   const [lastMessageTime, setLastMessageTime] = useState<number>(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Initialize sessionId
+  // Load messages from localStorage on mount
   useEffect(() => {
-    let sId = localStorage.getItem(SESSION_KEY);
-    if (!sId) {
-      sId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-      localStorage.setItem(SESSION_KEY, sId);
-    }
-    setSessionId(sId);
-
     const savedMessages = localStorage.getItem(STORAGE_KEY);
-    if (savedMessages) setMessages(JSON.parse(savedMessages));
+    if (savedMessages) {
+      setMessages(JSON.parse(savedMessages));
+    }
   }, []);
 
   // Scroll to bottom
@@ -51,77 +36,70 @@ const Chat: React.FC<ChatProps> = ({ isOpen, onClose }) => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Firestore real-time subscription
-  useEffect(() => {
-    if (!sessionId || !isOpen) return;
-
-    const q = query(
-      collection(db, "messages"),
-      where("sessionId", "==", sessionId),
-      orderBy("timestamp")
-    );
-
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const msgs: Message[] = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      } as Message));
-      setMessages(msgs);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(msgs));
-    });
-
-    return () => unsubscribe();
-  }, [sessionId, isOpen]);
-
   const handleSend = async () => {
-    if (!input.trim() || !sessionId) return;
+    if (!input.trim()) return;
 
     // Rate limit
     const now = Date.now();
     if (now - lastMessageTime < RATE_LIMIT_MS) {
-      alert(
-        `Please wait ${Math.ceil(
-          (RATE_LIMIT_MS - (now - lastMessageTime)) / 1000
-        )}s before sending another message`
-      );
       return;
     }
 
-    const newMessage: Message = {
-      id: `local-${Date.now()}`,
+    const userMessage: Message = {
+      id: `user-${Date.now()}`,
       text: input,
       from: "user",
       timestamp: now,
     };
 
-    setMessages((prev) => [...prev, newMessage]);
+    const updatedMessages = [...messages, userMessage];
+    setMessages(updatedMessages);
     setInput("");
     setLastMessageTime(now);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify([...messages, newMessage]));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedMessages));
+    setIsLoading(true);
 
     try {
-      // Save to Firestore
-      await addDoc(collection(db, "messages"), {
-        sessionId,
-        text: input,
-        message: input,
-        from: "user",
-        timestamp: Date.now(),
-      });
-
-      // Send to Telegram
-      await fetch("/api/send-message", {
+      // Call the AI chat API
+      const response = await fetch("/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          sessionId,
           message: input,
         }),
       });
+
+      if (!response.ok) {
+        throw new Error("Failed to get AI response");
+      }
+
+      const data = await response.json();
+
+      const aiMessage: Message = {
+        id: `ai-${Date.now()}`,
+        text: data.reply,
+        from: "ai",
+        timestamp: Date.now(),
+      };
+
+      const finalMessages = [...updatedMessages, aiMessage];
+      setMessages(finalMessages);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(finalMessages));
     } catch (err) {
       console.error("Failed to send message:", err);
+      const errorMessage: Message = {
+        id: `error-${Date.now()}`,
+        text: "Sorry, I couldn't process your message. Please try again.",
+        from: "ai",
+        timestamp: Date.now(),
+      };
+      const errorMessages = [...updatedMessages, errorMessage];
+      setMessages(errorMessages);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(errorMessages));
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -162,17 +140,28 @@ const Chat: React.FC<ChatProps> = ({ isOpen, onClose }) => {
               key={msg.id}
               className={`flex ${msg.from === "user" ? "justify-end" : "justify-start"}`}
             >
-              <div
-                className={`px-4 py-2 rounded-xl max-w-[70%] break-words backdrop-blur-sm transition-all ${
-                  msg.from === "user"
-                    ? "bg-pink-500/60 dark:bg-pink-600/50 text-white"
-                    : "bg-white/30 dark:bg-white/15 text-gray-900 dark:text-white"
-                }`}
-              >
-                {msg.text || (msg as any).message}
-              </div>
+            <div
+              className={`px-4 py-2 rounded-xl max-w-[70%] break-words backdrop-blur-sm transition-all ${
+                msg.from === "user"
+                  ? "bg-pink-500/60 dark:bg-pink-600/50 text-white"
+                  : "bg-white/30 dark:bg-white/15 text-gray-900 dark:text-white"
+              }`}
+            >
+              {msg.text}
+            </div>
             </div>
           ))}
+          {isLoading && (
+            <div className="flex justify-start">
+              <div className="px-4 py-2 rounded-xl bg-white/30 dark:bg-white/15 text-gray-900 dark:text-white">
+                <div className="flex gap-1">
+                  <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" />
+                  <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }} />
+                  <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: "0.4s" }} />
+                </div>
+              </div>
+            </div>
+          )}
           <div ref={messagesEndRef} />
         </div>
 
@@ -190,9 +179,10 @@ const Chat: React.FC<ChatProps> = ({ isOpen, onClose }) => {
           />
           <button
             onClick={handleSend}
-            className="bg-pink-500/60 dark:bg-pink-600/50 hover:bg-pink-500/80 dark:hover:bg-pink-600/70 text-white px-4 py-2 rounded-xl transition-all duration-200"
+            className="bg-pink-500/60 dark:bg-pink-600/50 hover:bg-pink-500/80 dark:hover:bg-pink-600/70 text-white px-4 py-2 rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={isLoading}
           >
-            Send
+            {isLoading ? "..." : "Send"}
           </button>
         </div>
       </div>

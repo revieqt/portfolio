@@ -1,7 +1,11 @@
 import { Fade } from "react-awesome-reveal";
-import { FaCode, FaClock, FaUsers, FaRocket } from "react-icons/fa";
+import { FaCode, FaClock, FaUsers, FaRocket, FaImage } from "react-icons/fa";
 
-export default function About() {
+type AboutProps = {
+  setIsGalleryOpen: () => void;
+};
+
+export default function About({ setIsGalleryOpen }: AboutProps) {
   return (
     <section id="about" className="relative py-24 px-4 bg-white dark:bg-gray-900 overflow-hidden">
       <style>
@@ -23,6 +27,14 @@ export default function About() {
             <p className="text-base text-gray-700 dark:text-white/75 leading-relaxed text-center lg:text-left">
               Focused on web and mobile development. I enjoy learning how things work behind the scenes and bringing ideas to life through code.
             </p>
+
+            <button
+              onClick={() => setIsGalleryOpen()}
+              className="w-full lg:w-auto px-4 py-3 rounded-lg font-mono text-sm font-semibold flex items-center justify-center lg:justify-start gap-2 text-green-500 border border-green-500/30 hover:border-green-500 transition-all duration-300 glow-green"
+            >
+              <FaImage className="w-4 h-4" />
+              My Gallery
+            </button>
           </div>
 
           <div className="space-y-4">

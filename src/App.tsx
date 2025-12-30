@@ -8,10 +8,12 @@ import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Chat from "./components/Chat";
+import Gallery from "./components/Gallery";
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(true);
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [isScrolledPastHero, setIsScrolledPastHero] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -105,19 +107,16 @@ export default function App() {
       `}</style>
 
       <div className="relative z-10">
-        <div className="fixed top-0 right-0 p-4 flex space-x-2 z-50">
+        <div className="fixed top-0 right-0 p-4 flex space-x-2 z-40">
           <button
             onClick={() => setIsChatOpen(true)}
-            className="p-2 px-4 flex gap-2 rounded-full backdrop-blur-md bg-white/10 dark:bg-white/5 hover:bg-white/20 dark:hover:bg-white/10 transition shadow-lg hover:shadow-xl animate-slide-in button-glow"
+            className="p-2 rounded-full backdrop-blur-md bg-white/10 dark:bg-white/5 hover:bg-white/20 dark:hover:bg-white/10 transition shadow-lg hover:shadow-xl animate-slide-in button-glow"
             style={{
               transition: "transform 0.3s ease-out"
             }}
             aria-label="Find out more with AI"
           >
             <ChatBubbleOvalLeftIcon className="w-5 h-5" />
-            <p className="text-sm text-gray-700 dark:text-white/75 button-glow">
-              Find out more with AI
-            </p>
           </button>
           <button
             onClick={() => setDarkMode(!darkMode)}
@@ -195,12 +194,18 @@ export default function App() {
         
         
         <Hero />
-        <About />
+        <About 
+         setIsGalleryOpen={() => setIsGalleryOpen(true)}
+        />
         <Skills />
         <Certifications />
         <Projects />
         <Contact />
         <Footer />
+
+        {isGalleryOpen && (
+          <Gallery onClose={() => setIsGalleryOpen(false)} />
+        )}
 
         <Chat
           isOpen={isChatOpen}
