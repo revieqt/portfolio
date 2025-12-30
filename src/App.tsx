@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { SunIcon, MoonIcon, ChatBubbleOvalLeftIcon } from "@heroicons/react/24/solid";
+import { SunIcon, MoonIcon, ChatBubbleOvalLeftIcon, Bars3Icon } from "@heroicons/react/24/solid";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Skills from "./components/Skills";
@@ -12,10 +12,33 @@ import Chat from "./components/Chat";
 export default function App() {
   const [darkMode, setDarkMode] = useState(true);
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isScrolledPastHero, setIsScrolledPastHero] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", darkMode);
   }, [darkMode]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolledPastHero(window.scrollY > window.innerHeight);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const href = e.currentTarget.getAttribute("href");
+    if (href?.startsWith("#")) {
+      e.preventDefault();
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+    setIsMenuOpen(false);
+  };
 
   return (
     <div className="font-sans bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-500 relative overflow-hidden">
@@ -46,26 +69,131 @@ export default function App() {
         .animation-delay-4000 {
           animation-delay: 4s;
         }
+        @keyframes slideInUp {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        @keyframes slideOut {
+          from {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          to {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+        }
+        .animate-slide-in {
+          animation: slideInUp 0.3s ease-out;
+        }
+        .animate-slide-out {
+          animation: slideOut 0.3s ease-out;
+        }
+        .menu-link-glow:hover {
+          color: rgb(34, 197, 94);
+          text-shadow: 0 0 10px rgba(34, 197, 94, 0.6), 0 0 15px rgba(34, 197, 94, 0.4);
+        }
+        .button-glow:hover {
+          color: rgb(34, 197, 94);
+        }
       `}</style>
 
       <div className="relative z-10">
-        <button
-          onClick={() => setIsChatOpen(true)}
-          className="p-2 px-4 z-50 flex gap-2 fixed top-5 right-16 rounded-full backdrop-blur-md bg-white/10 dark:bg-white/5 hover:border hover:border-gray-400 dark:hover:border-gray-200 hover:bg-white/20 dark:hover:bg-white/10 transition shadow-lg hover:shadow-xl"
-          aria-label="Toggle dark mode"
-        >
-          <ChatBubbleOvalLeftIcon className="w-5 h-5" />
-          <p className="text-sm text-gray-700 dark:text-white/75">
-            Find out more with AI
-          </p>
-        </button>
-        <button
-          onClick={() => setDarkMode(!darkMode)}
-          className="p-2 z-50 fixed top-5 right-5 rounded-full backdrop-blur-md bg-white/10 dark:bg-white/5 hover:border hover:border-gray-400 dark:hover:border-gray-200 hover:bg-white/20 dark:hover:bg-white/10 transition shadow-lg hover:shadow-xl"
-          aria-label="Toggle dark mode"
-        >
-          {darkMode ? <SunIcon className="w-5 h-5" /> : <MoonIcon className="w-5 h-5" />}
-        </button>
+        <div className="fixed top-0 right-0 p-4 flex space-x-2 z-50">
+          <button
+            onClick={() => setIsChatOpen(true)}
+            className="p-2 px-4 flex gap-2 rounded-full backdrop-blur-md bg-white/10 dark:bg-white/5 hover:bg-white/20 dark:hover:bg-white/10 transition shadow-lg hover:shadow-xl animate-slide-in button-glow"
+            style={{
+              transition: "transform 0.3s ease-out"
+            }}
+            aria-label="Find out more with AI"
+          >
+            <ChatBubbleOvalLeftIcon className="w-5 h-5" />
+            <p className="text-sm text-gray-700 dark:text-white/75 button-glow">
+              Find out more with AI
+            </p>
+          </button>
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className="p-2 rounded-full backdrop-blur-md bg-white/10 dark:bg-white/5 hover:bg-white/20 dark:hover:bg-white/10 transition shadow-lg hover:shadow-xl animate-slide-in button-glow"
+            style={{
+              transition: "transform 0.3s ease-out"
+            }}
+            aria-label="Toggle dark mode"
+          >
+            {darkMode ? <SunIcon className="w-5 h-5" /> : <MoonIcon className="w-5 h-5" />}
+          </button>
+          {isScrolledPastHero && (
+            <div className="relative">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="p-2 rounded-full backdrop-blur-md bg-white/10 dark:bg-white/5 hover:bg-white/20 dark:hover:bg-white/10 transition shadow-lg hover:shadow-xl animate-slide-in relative z-10 button-glow"
+                aria-label="Menu"
+              >
+                <Bars3Icon className="w-5 h-5" />
+              </button>
+
+              {isMenuOpen && (
+                <div className={`absolute top-full right-0 mt-2 w-48 backdrop-blur-md bg-white/10 dark:bg-white/5 border border-gray-400/20 dark:border-gray-200/20 rounded-lg shadow-lg ${
+                  isMenuOpen ? "animate-slide-in" : "animate-slide-out"
+                }`}>
+                  <nav className="p-4 space-y-2">
+                    <a
+                      href="#hero"
+                      onClick={handleNavClick}
+                      className="block px-4 py-2 text-sm text-gray-700 dark:text-white/75 transition-all rounded menu-link-glow"
+                    >
+                      Home
+                    </a>
+                    <a
+                      href="#about"
+                      onClick={handleNavClick}
+                      className="block px-4 py-2 text-sm text-gray-700 dark:text-white/75 transition-all rounded menu-link-glow"
+                    >
+                      About
+                    </a>
+                    <a
+                      href="#skills"
+                      onClick={handleNavClick}
+                      className="block px-4 py-2 text-sm text-gray-700 dark:text-white/75 transition-all rounded menu-link-glow"
+                    >
+                      Skills
+                    </a>
+                    <a
+                      href="#certifications"
+                      onClick={handleNavClick}
+                      className="block px-4 py-2 text-sm text-gray-700 dark:text-white/75 transition-all rounded menu-link-glow"
+                    >
+                      Certifications
+                    </a>
+                    <a
+                      href="#projects"
+                      onClick={handleNavClick}
+                      className="block px-4 py-2 text-sm text-gray-700 dark:text-white/75 transition-all rounded menu-link-glow"
+                    >
+                      Projects
+                    </a>
+                    <a
+                      href="#contact"
+                      onClick={handleNavClick}
+                      className="block px-4 py-2 text-sm text-gray-700 dark:text-white/75 transition-all rounded menu-link-glow"
+                    >
+                      Contact
+                    </a>
+                  </nav>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+        
+        
         <Hero />
         <About />
         <Skills />

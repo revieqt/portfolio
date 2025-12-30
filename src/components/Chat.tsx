@@ -135,7 +135,7 @@ const Chat: React.FC<ChatProps> = ({ isOpen, onClose }) => {
       />
       <div
         className={`fixed z-50 flex flex-col overflow-hidden transition-all duration-300 ease-in-out
-        md:bottom-0 md:right-0 md:w-[500px] md:top-0 md:rounded-tl-3xl md:rounded-bl-3xl
+        md:bottom-3 md:right-3 md:w-[500px] md:top-3 rounded-2xl
         inset-0 md:inset-auto
         bg-white/15 dark:bg-white/10 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-2xl`}
       >

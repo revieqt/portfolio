@@ -65,7 +65,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="h-screen w-full relative">
+    <section id="hero"className="h-screen w-full relative">
       <style>
         {`
         @keyframes meshDrift {
