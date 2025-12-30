@@ -79,6 +79,10 @@ export default function Hero() {
             background-position: 0% 0%, 100% 100%, 50% 50%;
           }
         }
+
+        .typing-glow {
+          text-shadow: 0 0 15px rgba(34, 197, 94, 0.6), 0 0 25px rgba(34, 197, 94, 0.4);
+        }
         `}
       </style>
 
@@ -136,7 +140,7 @@ export default function Hero() {
                 Josh Opsima
               </h1>
               <p className="text-lg text-gray-700 dark:text-white/75 mb-4">
-                <span className="font-semibold font-mono text-green-600">{displayText}</span><span className="animate-pulse text-green-500">|</span>
+                <span className="font-semibold font-mono text-green-600 typing-glow">{displayText}</span><span className="animate-pulse text-green-500">|</span>
               </p>
 
               <nav className="flex flex-wrap justify-center gap-4 text-sm sm:text-base">
@@ -175,7 +179,7 @@ export default function Hero() {
               </h1>
               <div className="ml-20 pl-8">
                 <p className="text-xl text-gray-700 dark:text-white/75 mb-8 leading-relaxed text-right">
-                  <span className="font-semibold font-mono text-green-500">{displayText}</span><span className="animate-pulse text-green-500">|</span>  based in the Philippines.
+                  <span className="font-semibold font-mono text-green-500 typing-glow">{displayText}</span><span className="animate-pulse text-green-500">|</span>  based in the Philippines.
                 </p>
 
                 <nav className="flex gap-6 text-lg justify-end">
