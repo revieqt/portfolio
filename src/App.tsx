@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
-import { SunIcon, MoonIcon, 
-  // ChatBubbleOvalLeftIcon 
-} from "@heroicons/react/24/solid";
+import { SunIcon, MoonIcon, ChatBubbleOvalLeftIcon } from "@heroicons/react/24/solid";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Skills from "./components/Skills";
@@ -13,7 +11,7 @@ import Footer from "./components/Footer";
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(true);
-  // const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", darkMode);
@@ -51,16 +49,16 @@ export default function App() {
       `}</style>
 
       <div className="relative z-10">
-        {/* <button
+        <button
           onClick={() => setIsChatOpen(true)}
           className="p-2 px-4 z-50 flex gap-2 fixed top-5 right-16 rounded-full backdrop-blur-md bg-white/10 dark:bg-white/5 hover:border hover:border-gray-400 dark:hover:border-gray-200 hover:bg-white/20 dark:hover:bg-white/10 transition shadow-lg hover:shadow-xl"
           aria-label="Toggle dark mode"
         >
           <ChatBubbleOvalLeftIcon className="w-5 h-5" />
           <p className="text-sm text-gray-700 dark:text-white/75">
-            Chat with me!
+            Find out more with AI
           </p>
-        </button> */}
+        </button>
         <button
           onClick={() => setDarkMode(!darkMode)}
           className="p-2 z-50 fixed top-5 right-5 rounded-full backdrop-blur-md bg-white/10 dark:bg-white/5 hover:border hover:border-gray-400 dark:hover:border-gray-200 hover:bg-white/20 dark:hover:bg-white/10 transition shadow-lg hover:shadow-xl"
