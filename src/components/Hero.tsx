@@ -143,9 +143,7 @@ export default function Hero() {
                 <span className="font-semibold font-mono text-green-600 typing-glow">{displayText}</span><span className="animate-pulse text-green-500">|</span>
               </p>
 
-              <nav className="flex flex-wrap justify-center gap-4 text-sm sm:text-base">
-                <a href="#about" onClick={handleNavClick} className="text-gray-500 text-sm dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">About</a>
-                <span className="text-gray-500 dark:text-white/90">·</span>
+              <nav className="flex flex-wrap justify-center gap-3 text-sm sm:text-base">
                 <a href="#skills" onClick={handleNavClick} className="text-gray-500 text-sm dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">Skills</a>
                 <span className="text-gray-500 dark:text-white/90">·</span>
                 <a href="#certifications" onClick={handleNavClick} className="text-gray-500 text-sm dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">Certifications</a>
