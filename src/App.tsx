@@ -7,7 +7,7 @@ import Certifications from "./components/Certifications";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-// import Chat from "./components/Chat";
+import Chat from "./components/Chat";
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -74,10 +74,10 @@ export default function App() {
         <Contact />
         <Footer />
 
-        {/* <Chat
+        <Chat
           isOpen={isChatOpen}
           onClose={() => setIsChatOpen(false)}
-        /> */}
+        />
       </div>
     </div>
   );
