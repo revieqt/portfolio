@@ -23,7 +23,6 @@ const Chat: React.FC<ChatProps> = ({ isOpen, onClose }) => {
   const [lastMessageTime, setLastMessageTime] = useState<number>(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Load messages from localStorage on mount
   useEffect(() => {
     const savedMessages = localStorage.getItem(STORAGE_KEY);
     if (savedMessages) {
@@ -31,7 +30,6 @@ const Chat: React.FC<ChatProps> = ({ isOpen, onClose }) => {
     }
   }, []);
 
-  // Scroll to bottom
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -39,7 +37,6 @@ const Chat: React.FC<ChatProps> = ({ isOpen, onClose }) => {
   const handleSend = async () => {
     if (!input.trim()) return;
 
-    // Rate limit
     const now = Date.now();
     if (now - lastMessageTime < RATE_LIMIT_MS) {
       return;
@@ -60,7 +57,6 @@ const Chat: React.FC<ChatProps> = ({ isOpen, onClose }) => {
     setIsLoading(true);
 
     try {
-      // Call the AI chat API
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: {
@@ -117,7 +113,6 @@ const Chat: React.FC<ChatProps> = ({ isOpen, onClose }) => {
         inset-0 md:inset-auto
         bg-white/15 dark:bg-white/10 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-2xl`}
       >
-        {/* Header */}
         <div className="flex items-center justify-between p-4 md:p-6 border-b border-white/20 dark:border-white/10 bg-white/5 dark:bg-white/3 backdrop-blur-sm">
           <h2 className="text-gray-900 dark:text-white font-semibold text-lg">Chat with Me</h2>
           <button
@@ -128,7 +123,6 @@ const Chat: React.FC<ChatProps> = ({ isOpen, onClose }) => {
           </button>
         </div>
 
-        {/* Messages */}
         <div className="flex-1 p-4 md:p-6 overflow-y-auto space-y-3 bg-white/5 dark:bg-white/3">
           {messages.length === 0 && (
             <div className="flex items-center justify-center h-full text-center">
@@ -165,7 +159,6 @@ const Chat: React.FC<ChatProps> = ({ isOpen, onClose }) => {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input */}
         <div className="p-4 md:p-6 border-t border-white/20 dark:border-white/10 flex items-center gap-2 bg-white/5 dark:bg-white/3 backdrop-blur-sm">
           <input
             type="text"
