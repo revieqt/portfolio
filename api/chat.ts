@@ -1,57 +1,49 @@
 /* =========================================================
-   PORTFOLIO KNOWLEDGE BASE (MARKDOWN ENABLED)
+   PORTFOLIO KNOWLEDGE BASE (PLAIN TEXT + TAGS)
    ========================================================= */
 
 const PORTFOLIO_DATA = [
   {
     id: "about",
-    text: `
-### 👋 About Me
-I’m **Josh Opsima**, a student developer based in the **Philippines**.
-I specialize in **React**, **React Native**, and **full-stack development**.
-`
+    tags: ["about", "who", "yourself", "background"],
+    text:
+      "I am Josh Opsima, a student developer based in the Philippines. I focus on building modern web and mobile applications using React, React Native, and full-stack JavaScript technologies."
   },
   {
     id: "projects",
-    text: `
-### 🚀 Projects
-I built **TaraG**, a travel companion app featuring:
-- 🗺️ Maps & routing
-- ☁️ Weather forecasts
-- 👥 Group trips & itineraries
-- 🚨 Emergency alerts
-- 📡 Offline support  
-
-Built with **React Native**, **Firebase**, and **Node.js**.
-`
+    tags: ["projects", "apps", "work", "tarag"],
+    text:
+      "I have worked on several application projects, including TaraG, a travel companion app with maps, route planning, weather forecasts, group trips, itineraries, emergency alerts, and offline support."
   },
   {
     id: "skills",
-    text: `
-### 🛠️ Skills
-- **Frontend:** React, TypeScript, Tailwind CSS
-- **Mobile:** React Native, Expo
-- **Backend:** Node.js, Firebase
-- **Design:** UI / UX
-`
+    tags: ["skills", "tech", "stack", "technologies"],
+    text:
+      "My technical skills include React, TypeScript, JavaScript, React Native, Expo, Firebase, Node.js, Tailwind CSS, and UI and UX design."
+  },
+  {
+    id: "architecture",
+    tags: ["architecture", "backend", "system", "design"],
+    text:
+      "I design applications using modular and scalable architectures, including serverless functions, REST APIs, Firebase authentication, and hybrid online and offline data handling."
+  },
+  {
+    id: "experience",
+    tags: ["experience", "background", "development"],
+    text:
+      "I have experience building mobile applications, admin dashboards, and web portals, including real-time features, authentication systems, and location-based services."
   },
   {
     id: "goals",
-    text: `
-### 🎯 Goals
-I’m currently seeking **internship / OJT opportunities**
-to gain real-world experience and grow as a software developer.
-`
+    tags: ["goals", "ojt", "internship", "career"],
+    text:
+      "I am currently seeking internship or OJT opportunities where I can gain real-world experience, improve my skills, and contribute to a professional development team."
   },
   {
     id: "contact",
-    text: `
-### 📬 Contact
-You can reach me through:
-- 🌐 My portfolio website
-- 💼 LinkedIn
-- ✉️ Email
-`
+    tags: ["contact", "reach", "connect"],
+    text:
+      "I am open to collaboration, internship opportunities, and project discussions through my professional contact channels."
   }
 ];
 
@@ -77,7 +69,9 @@ function cosineSimilarity(
   a: Record<string, number>,
   b: Record<string, number>
 ): number {
-  let dot = 0, magA = 0, magB = 0;
+  let dot = 0;
+  let magA = 0;
+  let magB = 0;
 
   for (const k in a) {
     magA += a[k] ** 2;
@@ -93,12 +87,6 @@ function cosineSimilarity(
    OPTIONAL OPEN-SOURCE LLM REWRITE (PLUG-IN)
    ========================================================= */
 
-/*
-  To enable:
-  - Deploy a Hugging Face Space (free)
-  - Replace URL below
-  - If unavailable, system gracefully skips rewrite
-*/
 async function rewriteWithLLM(
   question: string,
   content: string
@@ -107,17 +95,14 @@ async function rewriteWithLLM(
     const res = await fetch("https://your-hf-space-url.hf.space/run", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        question,
-        content
-      })
+      body: JSON.stringify({ question, content })
     });
 
     if (!res.ok) return content;
     const data = await res.json();
     return data.text || content;
   } catch {
-    return content; // fallback if LLM is offline
+    return content;
   }
 }
 
@@ -135,54 +120,55 @@ export async function POST(req: Request) {
   }
 
   const userVec = textToVector(message);
+  const normalizedMessage = normalize(message);
 
-  // Score all entries
+  // Score entries with semantic + tag boost
   const scored = PORTFOLIO_DATA.map(entry => {
-    const score = cosineSimilarity(
+    const semanticScore = cosineSimilarity(
       userVec,
       textToVector(entry.text)
     );
-    return { ...entry, score };
+
+    const tagBoost = entry.tags.some(tag =>
+      normalizedMessage.includes(tag)
+    )
+      ? 0.15
+      : 0;
+
+    return {
+      ...entry,
+      score: semanticScore + tagBoost
+    };
   })
-    .filter(e => e.score > 0.1)
+    .filter(e => e.score > 0.15)
     .sort((a, b) => b.score - a.score)
-    .slice(0, 3); // 🔥 MULTI-ANSWER BLENDING
+    .slice(0, 3); // MULTI-ID ANSWERS
 
   let combinedAnswer = scored
-    .map(e => e.text.trim())
-    .join("\n\n---\n\n");
+    .map(e => e.text)
+    .join(" ");
 
   const confidence =
     scored.reduce((acc, cur) => acc + cur.score, 0) /
     (scored.length || 1);
 
-  // ✨ Optional rewrite (still free)
+  // Optional rewrite
   combinedAnswer = await rewriteWithLLM(
     message,
     combinedAnswer
   );
 
   /* =========================================================
-     CONFIDENCE-BASED FOLLOW-UP
+     CONFIDENCE-BASED FOLLOW-UP (PLAIN TEXT)
      ========================================================= */
 
   let followUp = "";
   if (confidence < 0.25) {
-    followUp = `
----
-
-🤔 *Want to know more?*
-Try asking about:
-- My **projects**
-- My **tech stack**
-- My **career goals**
-`;
+    followUp =
+      " You can ask about my projects, technical skills, experience, or career goals.";
   } else if (confidence < 0.45) {
-    followUp = `
----
-
-👉 *You can also ask about my experience or tools I use.*
-`;
+    followUp =
+      " You may also want to know more about my development experience or the technologies I use.";
   }
 
   return new Response(
@@ -190,7 +176,7 @@ Try asking about:
       reply: combinedAnswer + followUp,
       confidence: Number(confidence.toFixed(2)),
       matchedTopics: scored.map(s => s.id),
-      format: "markdown"
+      format: "plain-text"
     }),
     {
       status: 200,
