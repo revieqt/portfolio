@@ -19,7 +19,7 @@ export default function About({ setIsGalleryOpen }: AboutProps) {
         <div className="grid lg:grid-cols-2 gap-20">
           <div className="space-y-6">
             <p className="text-base text-gray-700 dark:text-white/75 leading-relaxed text-center lg:text-left">
-              I’m a student aspiring developer with a passion for building practical, user-focused digital experiences. I enjoy turning ideas into functional applications while continuously learning new technologies and best practices.
+              I’m a developer with a passion for building practical, user-focused digital experiences. I enjoy turning ideas into functional applications while continuously learning new technologies and best practices.
             </p>
             <p className="text-base text-gray-700 dark:text-white/75 leading-relaxed text-center lg:text-left">
               As I grow my skills, I focus on writing clean code, solving real-world problems, and improving both performance and usability in every project I work on.
