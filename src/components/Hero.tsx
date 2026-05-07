@@ -126,7 +126,7 @@ export default function Hero() {
             <img
               src={heroImg}
               alt="Hero"
-              className="h-full w-auto object-cover drop-shadow-2xl"
+              className="h-full w-full object-cover drop-shadow-2xl"
             />
           </div>
 
