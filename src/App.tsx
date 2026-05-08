@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { SunIcon, MoonIcon, ChatBubbleOvalLeftIcon, Bars3Icon } from "@heroicons/react/24/solid";
 import Hero from "./components/sections/Hero";
-import About from "./components/sections/About";
 import Intro from "./components/sections/Intro";
 import Skills from "./components/sections/Skills";
 import Certifications from "./components/sections/Certifications";
@@ -195,10 +194,7 @@ export default function App() {
         
         
         <Intro />
-        <Hero />
-        <About 
-         setIsGalleryOpen={() => setIsGalleryOpen(true)}
-        />
+        <Hero setIsGalleryOpen={() => setIsGalleryOpen(true)}/>
         <Skills />
         <Certifications />
         <Projects />

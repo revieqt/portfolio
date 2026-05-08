@@ -19,7 +19,7 @@ export default function Intro() {
   useEffect(() => {
     setMounted(true);
     const onPageLoad = () => {
-      window.setTimeout(() => setStage(stages.entering), 80);
+      window.setTimeout(() => setStage(stages.entering), 0);
     };
     if (document.readyState === "complete") {
       onPageLoad();
@@ -31,7 +31,7 @@ export default function Intro() {
 
   useEffect(() => {
     if (stage === stages.entering) {
-      const t = window.setTimeout(() => setStage(stages.glow), 3000);
+      const t = window.setTimeout(() => setStage(stages.glow), 0);
       return () => window.clearTimeout(t);
     }
     if (stage === stages.glow) {
@@ -111,14 +111,6 @@ export default function Intro() {
                 animation: "spin 1s linear infinite",
               }} />
               <div style={{ width: 24, height: 24, borderRadius: "50%", background: "white" }} />
-            </div>
-            <div>
-              <p style={{ fontSize: 12, textTransform: "uppercase", letterSpacing: "0.35em", color: "rgba(255,255,255,0.7)", margin: 0 }}>
-                Loading
-              </p>
-              <p style={{ fontSize: 24, fontWeight: "bold", margin: "8px 0 0" }}>
-                Preparing the experience
-              </p>
             </div>
           </div>
         ) : (

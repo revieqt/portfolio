@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
 import heroImg from "@/assets/images/hero_img.png";
 import heroBg from "@/assets/images/hero_bg.png";
+import { FaCode, FaClock, FaUsers, FaImage } from "react-icons/fa";
+import { Fade } from "react-awesome-reveal";
+import { useIsMobile } from "@/hooks/useIsMobile"
 
-export default function Hero() {
+type HeroProps = {
+  setIsGalleryOpen: () => void;
+};
+
+export default function Hero({ setIsGalleryOpen }: HeroProps) {
+  const isMobile = useIsMobile();
   const [textVisible, setTextVisible] = useState(false);
   const [displayText, setDisplayText] = useState("");
   const [textIndex, setTextIndex] = useState(0);
-  const [scrollY, setScrollY] = useState(0);
 
   const textOptions = [
     "<> Aspiring Developer </>",
@@ -19,14 +26,6 @@ export default function Hero() {
     setTextVisible(true);
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   useEffect(() => {
     let charIndex = 0;
@@ -65,7 +64,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero"className="h-screen w-full relative">
+    <section id="hero"className="w-full relative">
       <style>
         {`
         @keyframes meshDrift {
@@ -114,10 +113,8 @@ export default function Hero() {
         className="absolute inset-0 z-0 bg-cover bg-center opacity-25 grayscale"
         style={{ 
           backgroundImage: `url(${heroBg})`,
-          transform: `skewY(10deg) translateY(${scrollY * 0.15}px)`
         }}
       />
-      <div className="absolute bottom-0 left-0 right-0 h-[100%] bg-gradient-to-b from-transparent via-transparent to-white dark:to-gray-900 pointer-events-none z-30" />
       
       
       
@@ -125,34 +122,32 @@ export default function Hero() {
       
       
       
-      
-      
-      
-      
-      <div className="relative h-screen overflow-hidden mx-auto max-w-7xl flex items-center justify-center">
+      { isMobile && 
+      <div className="relative max-w-7xl justify-center items-center mx-auto">
 
         {/* MOBILE */}
-        <div className="lg:hidden relative h-full flex flex-col justify-between items-center px-4">
+        <div className="lg:hidden relative h-screen flex flex-col justify-between items-center px-4 justify-center mx-auto items-center">
           <div className="absolute inset-0 flex items-center justify-center z-0 mt-20">
             <img
               src={heroImg}
               alt="Hero"
-              className="h-full w-full object-cover drop-shadow-2xl"
+              className="h-full object-cover drop-shadow-2xl"
             />
           </div>
 
-          <div className="relative z-50 mt-auto mb-20 text-center px-4">
+          <div className="relative z-50 mt-auto mb-20 text-center px-4 mx-auto">
             <div
               className={`transition-all duration-1000 ease-out ${
                 textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
             >
-              <h1 className="text-4xl sm:text-5xl font-extrabold uppercase tracking-widest text-gray-900 dark:text-white/90 mb-4">
-                Josh Opsima
-              </h1>
-              <p className="text-lg text-gray-700 dark:text-white/75 mb-4">
+              <p className="text-lg text-gray-700 dark:text-white/75 mb-2">
                 <span className="font-semibold font-mono text-green-600 typing-glow">{displayText}</span><span className="animate-pulse text-green-500">|</span>
               </p>
+              <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white/90 mb-4">
+                Josh Opsima
+              </h1>
+              
 
               <nav className="flex flex-wrap justify-center gap-3 text-sm sm:text-base">
                 <a href="#skills" onClick={handleNavClick} className="text-gray-500 text-sm dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">Skills</a>
@@ -166,47 +161,177 @@ export default function Hero() {
               
             </div>
           </div>
+          <div className="absolute bottom-0 left-0 right-0 h-[100%] bg-gradient-to-b from-transparent via-transparent to-white dark:to-gray-900 pointer-events-none z-30" />
         </div>
 
-        <div className="hidden lg:flex relative h-full">
-          {/* <div className="absolute left-0 z-20 flex items-center justify-center h-full mt-20">
-            <img
-              src={heroImg}
-              alt="Hero"
-              className="h-full w-auto object-contain drop-shadow-2xl"
-            />
-          </div> */}
+        <div className="z-20 w-full px-8 z-50 justify-center items-center bg-gray-900">
+          <div className=" flex-row items-center justify-around gap-6">
+            <Fade direction="right" triggerOnce>
+              <div className="mb-2 glow-green flex flex-col items-center text-center gap-4 p-6 rounded-2xl border border-white/30 hover:border-green-400 dark:hover:border-green-400 transition-all duration-300 lg:items-start lg:text-left backdrop-blur-xl bg-gradient-to-br from-white/20 to-white/5 dark:from-white/10 dark:to-white/[0.02] shadow-xl hover:shadow-green-500/20">
+                <div className="text-2xl text-green-500">
+                  <FaCode />
+                </div>
+                <div>
+                  <p className="text-base uppercase tracking-widest font-bold text-gray-900 dark:text-white/90 mb-1">
+                    10+ Projects
+                  </p>
+                  <p className="text-gray-600 dark:text-white/60 text-sm">
+                    Built diverse applications from concept to production
+                  </p>
+                </div>
+              </div>
+            </Fade>
+            
+            <Fade direction="right" delay={100} triggerOnce>
+              <div className="mb-2 glow-green flex flex-col items-center text-center gap-4 p-6 rounded-2xl border border-white/30 hover:border-green-400 dark:hover:border-green-400 transition-all duration-300 lg:items-start lg:text-left backdrop-blur-xl bg-gradient-to-br from-white/20 to-white/5 dark:from-white/10 dark:to-white/[0.02] shadow-xl hover:shadow-green-500/20">
+                <div className="text-2xl text-green-500">
+                  <FaClock />
+                </div>
+                <div>
+                  <p className="text-base uppercase tracking-widest font-bold text-gray-900 dark:text-white/90 mb-1">
+                    3+ Years
+                  </p>
+                  <p className="text-gray-600 dark:text-white/60 text-sm">
+                    Dedicated to mastering modern web development
+                  </p>
+                </div>
+              </div>
+            </Fade>
+            <Fade direction="right" delay={200} triggerOnce>
+              <div className="mb-2 glow-green flex flex-col items-center text-center gap-4 p-6 rounded-2xl border border-white/30 hover:border-green-400 dark:hover:border-green-400 transition-all duration-300 lg:items-start lg:text-left backdrop-blur-xl bg-gradient-to-br from-white/20 to-white/5 dark:from-white/10 dark:to-white/[0.02] shadow-xl hover:shadow-green-500/20">
+                <div className="text-2xl text-green-500">
+                  <FaUsers />
+                </div>
+                <div>
+                  <p className="text-base uppercase tracking-widest font-bold text-gray-900 dark:text-white/90 mb-1">
+                    3+ Clients
+                  </p>
+                  <p className="text-gray-600 dark:text-white/60 text-sm">
+                    Satisfied partners across various industries
+                  </p>
+                </div>
+              </div>
+            </Fade>
+          </div>
 
-          <div className="pr-8 z-10 ml-[280px] flex h-full">
-            <div
-              className={`transition-all duration-1000 ease-out ${
-                textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              }`}
-            >
+          <button
+            onClick={() => setIsGalleryOpen()}
+            className="w-full hover:underline px-4 py-6 rounded-lg font-mono text-sm font-semibold flex items-center justify-center gap-2 text-green-500 "
+          >
+            /View Josh's Gallery
+          </button>
+          
+        </div>
+        </div>
+      }
+
+      {!isMobile &&
+      <div className="w-full h-screen relative">
+        <div className="relative h-screen overflow-hidden max-w-7xl flex justify-center items-center mx-auto">
+          <div className="hidden lg:flex h-full mx-auto justify-between">
+            <div className="justify-start items-center z-10 pt-20 px-8">
+              <p className="text-xl text-gray-700 dark:text-white/75 mb-2 leading-relaxed">
+                <span className="font-semibold font-mono text-green-500 typing-glow">{displayText}</span><span className="animate-pulse text-green-500">|</span>
+              </p>
               <h1 className="text-8xl font-extrabold text-gray-900 dark:text-white/90 mb-6">
                 Josh Opsima
               </h1>
-              <div className="">
-                <p className="text-xl text-gray-700 dark:text-white/75 mb-8 leading-relaxed">
-                  <span className="font-semibold font-mono text-green-500 typing-glow">{displayText}</span><span className="animate-pulse text-green-500">|</span>  based in the Philippines.
-                </p>
+              <p className="text-lg text-gray-700 dark:text-white/75 mb-4 leading-relaxed font-mono mr-[400px]">
+                A Full-Stack Developer with a passion for building practical, user-focused digital experiences. 
+              </p>
 
-                <nav className="flex gap-6 text-lg justify-end">
-                  <a href="#about" onClick={handleNavClick} className="text-gray-500 dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">About</a>
-                  <span className="text-gray-900 dark:text-white/90">·</span>
-                  <a href="#skills" onClick={handleNavClick} className="text-gray-500 dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">Skills</a>
-                  <span className="text-gray-900 dark:text-white/90">·</span>
-                  <a href="#certifications" onClick={handleNavClick} className="text-gray-500 dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">Certifications</a>
-                  <span className="text-gray-900 dark:text-white/90">·</span>
-                  <a href="#projects" onClick={handleNavClick} className="text-gray-500 dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">Projects</a>
-                  <span className="text-gray-900 dark:text-white/90">·</span>
-                  <a href="#contact" onClick={handleNavClick} className="text-gray-500 dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">Contact</a>
-                </nav>
+              <nav className="flex gap-4 text-lg font-mono">
+                <a href="#about" onClick={handleNavClick} className="text-gray-500 dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">About</a>
+                <span className="text-gray-900 dark:text-white/90">·</span>
+                <a href="#skills" onClick={handleNavClick} className="text-gray-500 dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">Skills</a>
+                <span className="text-gray-900 dark:text-white/90">·</span>
+                <a href="#certifications" onClick={handleNavClick} className="text-gray-500 dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">Certifications</a>
+                <span className="text-gray-900 dark:text-white/90">·</span>
+                <a href="#projects" onClick={handleNavClick} className="text-gray-500 dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">Projects</a>
+                <span className="text-gray-900 dark:text-white/90">·</span>
+                <a href="#contact" onClick={handleNavClick} className="text-gray-500 dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">Contact</a>
+              </nav>
+              
+            </div>
+            
+            <div className="absolute right-0 z-20 flex items-center justify-center h-full mt-20">
+              <img
+                src={heroImg}
+                alt="Hero"
+                className="h-full w-auto object-contain drop-shadow-2xl"
+              />
+            </div>
+
+            <div className="absolute bottom-0 z-20 w-full px-8 z-50 mb-2 justify-center items-center">
+              <div className=" flex items-center justify-around gap-6">
+                <Fade direction="right" triggerOnce>
+                  <div className="glow-green flex flex-col items-center text-center gap-4 p-6 rounded-2xl border border-white/30 hover:border-green-400 dark:hover:border-green-400 transition-all duration-300 lg:items-start lg:text-left backdrop-blur-xl bg-gradient-to-br from-white/20 to-white/5 dark:from-white/10 dark:to-white/[0.02] shadow-xl hover:shadow-green-500/20">
+                    <div className="text-2xl text-green-500">
+                      <FaCode />
+                    </div>
+                    <div>
+                      <p className="text-base uppercase tracking-widest font-bold text-gray-900 dark:text-white/90 mb-1">
+                        10+ Projects
+                      </p>
+                      <p className="text-gray-600 dark:text-white/60 text-sm">
+                        Built diverse applications from concept to production
+                      </p>
+                    </div>
+                  </div>
+                </Fade>
+                
+                <Fade direction="right" delay={100} triggerOnce>
+                  <div className="glow-green flex flex-col items-center text-center gap-4 p-6 rounded-2xl border border-white/30 hover:border-green-400 dark:hover:border-green-400 transition-all duration-300 lg:items-start lg:text-left backdrop-blur-xl bg-gradient-to-br from-white/20 to-white/5 dark:from-white/10 dark:to-white/[0.02] shadow-xl hover:shadow-green-500/20">
+                    <div className="text-2xl text-green-500">
+                      <FaClock />
+                    </div>
+                    <div>
+                      <p className="text-base uppercase tracking-widest font-bold text-gray-900 dark:text-white/90 mb-1">
+                        3+ Years
+                      </p>
+                      <p className="text-gray-600 dark:text-white/60 text-sm">
+                        Dedicated to mastering modern web development
+                      </p>
+                    </div>
+                  </div>
+                </Fade>
+                <Fade direction="right" delay={200} triggerOnce>
+                  <div className="glow-green flex flex-col items-center text-center gap-4 p-6 rounded-2xl border border-white/30 hover:border-green-400 dark:hover:border-green-400 transition-all duration-300 lg:items-start lg:text-left backdrop-blur-xl bg-gradient-to-br from-white/20 to-white/5 dark:from-white/10 dark:to-white/[0.02] shadow-xl hover:shadow-green-500/20">
+                    <div className="text-2xl text-green-500">
+                      <FaUsers />
+                    </div>
+                    <div>
+                      <p className="text-base uppercase tracking-widest font-bold text-gray-900 dark:text-white/90 mb-1">
+                        3+ Clients
+                      </p>
+                      <p className="text-gray-600 dark:text-white/60 text-sm">
+                        Satisfied partners across various industries
+                      </p>
+                    </div>
+                  </div>
+                </Fade>
               </div>
+
+              <button
+                onClick={() => setIsGalleryOpen()}
+                className="w-full hover:underline px-4 py-6 rounded-lg font-mono text-sm font-semibold flex items-center justify-center gap-2 text-green-500 "
+              >
+                /View Josh's Gallery
+              </button>
+              
             </div>
           </div>
+          
         </div>
+        <div className="absolute bottom-0 left-0 right-0 h-[100%] bg-gradient-to-b from-transparent via-transparent to-white dark:to-gray-900 pointer-events-none z-30" />
       </div>
+        
+      }
+      
+      
+      
+      
+      
   </section>
   );
 }
