@@ -3,9 +3,9 @@
 import { useState, useEffect, useRef } from "react";
 import { EnvelopeIcon } from "@heroicons/react/24/solid";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { Fade } from "react-awesome-reveal";
 import type { FormData, HistoryItem } from "@/types/contact";
 import { PROMPTS } from "@/types/contact";
+import CliContainer from "@/components/ui/CliContainer";
 
 export default function Contact() {
   const [step, setStep] = useState(0);
@@ -85,17 +85,18 @@ export default function Contact() {
   const currentPrompt = PROMPTS[step];
 
   return (
-    <Fade direction="right">
       <section id="contact" className="relative py-20 px-3">
-        <div className="mx-auto max-w-7xl grid gap-12 lg:grid-cols-2 items-center">
+        <div className="absolute top-0 left-0 right-0 h-[100%] bg-gradient-to-t from-transparent via-transparent to-white dark:to-gray-900 pointer-events-none z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-[100%] bg-gradient-to-b from-transparent via-transparent to-white dark:to-gray-900 pointer-events-none z-10" />
+        <div className="mx-auto max-w-7xl grid gap-12 lg:grid-cols-2 items-center z-30">
 
           {/* Left — info */}
-          <div className="px-3">
+          <div className="px-3 z-30">
             <h2 className="text-4xl font-extrabold mb-6 text-center lg:text-left">
-              Get In Touch
+              /contact-me
             </h2>
 
-            <p className="text-gray-600 dark:text-gray-400 lg:max-w-md mb-8 text-center lg:text-left">
+            <p className="font-mono text-gray-600 dark:text-gray-400 lg:max-w-md mb-8 text-center lg:text-left">
               I'm always interested in hearing about new projects and opportunities. Feel free to reach out!
             </p>
 
@@ -105,7 +106,7 @@ export default function Contact() {
                 className="flex items-center gap-3 text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition"
               >
                 <EnvelopeIcon className="w-6 h-6" />
-                <span className="hidden lg:inline">revie.dev@gmail.com</span>
+                <span className="hidden lg:inline font-mono">revie.dev@gmail.com</span>
               </a>
               <a
                 href="https://github.com/revieqt"
@@ -114,7 +115,7 @@ export default function Contact() {
                 className="flex items-center gap-3 text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition"
               >
                 <FaGithub className="w-6 h-6" />
-                <span className="hidden lg:inline">revieqt</span>
+                <span className="hidden lg:inline font-mono">revieqt</span>
               </a>
               <a
                 href="https://linkedin.com/in/joshua-opsima-09a3a7316"
@@ -123,26 +124,17 @@ export default function Contact() {
                 className="flex items-center gap-3 text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition"
               >
                 <FaLinkedin className="w-6 h-6" />
-                <span className="hidden lg:inline">Joshua Opsima</span>
+                <span className="hidden lg:inline font-mono">Joshua Opsima</span>
               </a>
             </div>
           </div>
 
           {/* Right — CLI form */}
-          <div className="relative font-mono">
-            <div className="rounded-lg overflow-hidden border border-gray-800 bg-[#0d0d0d] shadow-xl flex flex-col h-[480px]">
-
-              {/* Title bar */}
-              <div className="flex items-center gap-2 bg-[#1a1a1a] px-4 py-2.5 border-b border-gray-800 shrink-0">
-                <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
-                <span className="w-3 h-3 rounded-full bg-[#febc2e]" />
-                <span className="w-3 h-3 rounded-full bg-[#28c840]" />
-                <span className="ml-2 text-xs text-gray-600 font-mono">contact — bash</span>
-              </div>
-
-              {/* Single scrollable terminal body — history + active input all inline */}
-              <div className="flex-1 overflow-y-auto p-5">
-
+          <CliContainer
+            title="contact — bash"
+            containerClassName="w-full h-[480px] z-30"
+            content={
+              <div>
                 {history.map((item, i) => {
                   if (item.type === "prompt")
                     return (
@@ -238,12 +230,10 @@ export default function Contact() {
 
                 <div ref={bottomRef} />
               </div>
-
-            </div>
-          </div>
+            }
+          />
 
         </div>
       </section>
-    </Fade>
   );
 }

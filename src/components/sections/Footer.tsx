@@ -13,17 +13,17 @@ export default function Footer() {
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-between">
           {/* Branding */}
           <div className="text-center sm:text-left">
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+            <p className="text-sm text-gray-600 dark:text-gray-400 font-mono">
               © {new Date().getFullYear()}{" "}
               <span className="font-medium text-gray-900 dark:text-gray-100">
                 Josh Opsima
               </span>
             </p>
-            <p className="text-xs text-gray-500 dark:text-gray-500">
-              Based in the Philippines · Open for opportunities
+            <p className="text-xs text-gray-500 dark:text-gray-500 font-mono mt-1">
+              Full Stack Developer · Open for opportunities
             </p>
             <button onClick={() => window.open("/resume.pdf", "_blank")}
-            className="mt-6 text-center text-xs text-gray-400 dark:text-gray-500 hover:underline align-middle mx-auto">
+            className="mt-6 text-center font-mono text-xs text-gray-400 dark:text-gray-500 underline align-middle mx-auto">
               View Resume
             </button>
           </div>

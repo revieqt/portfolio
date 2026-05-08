@@ -50,6 +50,17 @@ export default function App() {
         <div className="absolute -bottom-8 left-20 w-72 h-72 bg-cyan-400/20 dark:bg-cyan-500/10 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
       </div>
 
+      <div 
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: `
+            linear-gradient(0deg, transparent 24%, rgba(128, 128, 128, 0.15) 25%, rgba(128, 128, 128, 0.15) 26%, transparent 27%, transparent 74%, rgba(128, 128, 128, 0.15) 75%, rgba(128, 128, 128, 0.15) 76%, transparent 77%, transparent),
+            linear-gradient(90deg, transparent 24%, rgba(128, 128, 128, 0.15) 25%, rgba(128, 128, 128, 0.15) 26%, transparent 27%, transparent 74%, rgba(128, 128, 128, 0.15) 75%, rgba(128, 128, 128,0.15) 76%, transparent 77%, transparent)
+          `,
+          backgroundSize: '50px 50px'
+        }}
+      />
+
       <style>{`
         @keyframes blob {
           0%, 100% {
@@ -149,13 +160,6 @@ export default function App() {
                       className="block px-4 py-2 text-sm text-gray-700 dark:text-white/75 transition-all rounded menu-link-glow"
                     >
                       Home
-                    </a>
-                    <a
-                      href="#about"
-                      onClick={handleNavClick}
-                      className="block px-4 py-2 text-sm text-gray-700 dark:text-white/75 transition-all rounded menu-link-glow"
-                    >
-                      About
                     </a>
                     <a
                       href="#skills"

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { Fade} from "react-awesome-reveal";
 import { SKILLS } from "@/constants/skills";
+import CliContainer from "@/components/ui/CliContainer";
 
 export default function Skills() {
   const [groupIndex, setGroupIndex] = useState(0);
@@ -93,96 +93,70 @@ export default function Skills() {
 
   const next = () =>
     setGroupIndex((i) => (i + 1) % SKILLS.length);
-  const prev = () =>
-    setGroupIndex((i) => (i === 0 ? SKILLS.length - 1 : i - 1));
 
   return (
-    <Fade direction="left">
-      <section
-        id="skills"
-        ref={ref}
-        className="relative py-20 px-3 lg:h-screen overflow-hidden justify-center items-center flex"
-      >
-        <div className="mx-auto max-w-7xl grid gap-12 lg:grid-cols-2 items-center">
-          
-          <div className="px-3">
-            <h2 className="text-4xl font-extrabold mb-6 text-center lg:text-left">Skills</h2>
+    <section
+      id="skills"
+      ref={ref}
+      className="relative py-20 px-3 lg:h-screen overflow-hidden justify-center items-center flex"
+    >
+      <div className="absolute top-0 left-0 right-0 h-[100%] bg-gradient-to-t from-transparent via-transparent to-white dark:to-gray-900 pointer-events-none z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-[100%] bg-gradient-to-b from-transparent via-transparent to-white dark:to-gray-900 pointer-events-none z-10" />
+      <div className="mx-auto max-w-7xl grid gap-12 lg:grid-cols-2 items-center z-30">
+        
+        <div className="px-3">
+          <h2 className="text-4xl font-extrabold mb-6 text-center lg:text-left">/skills</h2>
 
-            <p className="text-gray-600 dark:text-gray-400 lg:max-w-md mb-8 text-center lg:text-left font-mono">
-              Every skill here tells a story of growth, exploration, and curiosity. Together, they map the journey I take from concept to execution.
-            </p>
+          <p className="text-gray-600 dark:text-gray-400 lg:max-w-md mb-8 text-center lg:text-left font-mono">
+            Every skill here tells a story of growth, exploration, and curiosity. Together, they map the journey I take from concept to execution.
+          </p>
 
-            <div className="flex flex-wrap gap-3 lg:justify-start justify-center">
-              {SKILLS.map((skill, i) => (
-                <button
-                  key={skill.category}
-                  onClick={() => setGroupIndex(i)}
-                  className={`
-                    px-4 py-2 rounded-lg font-mono text-sm transition
-                    border
-                    ${
-                      groupIndex === i
-                        ? "bg-green-500/10 text-green-400 border-green-500 shadow-[0_0_12px_rgba(34,197,94,0.35)]"
-                        : "border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-green-400 hover:text-green-400"
-                    }
-                  `}
-                >
-                  {skill.category}
-                </button>
-              ))}
-            </div>
-          </div>
-          
-          <div className="relative overflow-hidden rounded-lg">
-            <div className="bg-black font-mono text-sm text-green-400 h-[550px]">
-              <div className="absolute inset-x-0 z-50 justify-between flex items-center bg-gray-900/95 backdrop-blur-sm px-3 py-3">
-                <div className="flex items-center mr-3">
-                  <div className="flex items-center gap-2 p-1 mr-3">
-                    <span className="h-2 w-2 rounded-full bg-red-500" />
-                    <span className="h-2 w-2 rounded-full bg-yellow-400" />
-                    <span className="h-2 w-2 rounded-full bg-green-500" />
-                  </div>
-                  <div className="text-sm text-white/90 tracking-wide font-mono">
-                    skills/{categoryText}
-                  </div>
-                </div>
-
-                <div className="flex items-center mr-3 text-white/90 ">
-                  <div className="flex gap-4">
-                    <button onClick={prev} className="hover:underline font-mono">
-                      Previous
-                    </button>
-                    <button onClick={next} className="hover:underline font-mono">
-                      Next
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-4 p-6 pt-16">
-                {lines.map((line, i) => (
-                  <div key={i}>
-                    <div className="flex justify-between">
-                      <span>{line.name}</span>
-                      <span>{line.percent}</span>
-                    </div>
-
-                    <div className="mt-1 h-1.5 bg-green-900/40 rounded">
-                      <div
-                        className="h-full bg-green-400 rounded transition-all"
-                        style={{ width: `${line.bar}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="pointer-events-none absolute bottom-0 left-0 h-32 w-full bg-gradient-to-t from-gray-50 dark:from-gray-900 to-transparent" />
+          <div className="flex flex-wrap gap-3 lg:justify-start justify-center">
+            {SKILLS.map((skill, i) => (
+              <button
+                key={skill.category}
+                onClick={() => setGroupIndex(i)}
+                className={`
+                  px-4 py-2 rounded-lg font-mono text-sm transition backdrop-blur-sm
+                  border
+                  ${
+                    groupIndex === i
+                      ? "bg-green-500/10 text-green-400 border-green-500 shadow-[0_0_12px_rgba(34,197,94,0.35)]"
+                      : "border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-green-400 hover:text-green-400"
+                  }
+                `}
+              >
+                {skill.category}
+              </button>
+            ))}
           </div>
         </div>
-      </section>
-    </Fade>
+        
+        <CliContainer
+          title={`/${categoryText}`}
+          containerClassName="w-full h-[550px]"
+          content={
+            <div className="space-y-4">
+              {lines.map((line, i) => (
+                <div key={i}>
+                  <div className="flex justify-between font-mono text-sm mb-1 text-green-400">
+                    <span>{line.name}</span>
+                    <span>{line.percent}</span>
+                  </div>
+
+                  <div className="mt-1 h-1.5 bg-green-900/40 rounded">
+                    <div
+                      className="h-full bg-green-400 rounded transition-all"
+                      style={{ width: `${line.bar}%` }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          }
+        />
+      </div>
+    </section>
     
   );
 }

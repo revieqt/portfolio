@@ -1,5 +1,6 @@
 import {  ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import { useState, useEffect, useRef } from "react";
+import { projects } from "@/constants/projects";
 
 export default function Projects() {
   const [isAutoPlay, setIsAutoPlay] = useState(true);
@@ -9,40 +10,6 @@ export default function Projects() {
   const directionRef = useRef(1);
   const pauseCounterRef = useRef(0);
 
-  const projects = [
-    {
-      title: "TaraG Travel App",
-      description: "TaraG is a smart travel companion app that helps users plan trips, navigate routes, track locations, check weather, coordinate group travel, and access emergency assistance—all in one seamless experience.",
-      tags: ["React Native", "React", "Typescript", "Node.js", "MongoDB"],
-      image: "/projects/tarag.jfif",
-      link: "https://github.com",
-      demo: "https://example.com"
-    },
-    {
-      title: "Opswift POS",
-      description: "a POS system with built-in MIS and inventory management, designed to streamline sales, track stock in real time, generate insightful reports, and support better business decisions from one unified platform.",
-      tags: ["Java", "XAAMP", "MySQL"],
-      image: "/projects/opswift.jpg",
-      link: "https://github.com",
-      demo: "https://example.com"
-    },
-    {
-      title: "NoteIt",
-      description: "NoteIt is a simple and efficient note-taking app that helps users quickly capture ideas, organize notes, and stay productive anytime, anywhere.",
-      tags: ["PHP", "Javascript", "HTML", "CSS"],
-      image: "/projects/noteit.PNG",
-      link: "https://github.com",
-      demo: "https://example.com"
-    },
-    {
-      title: "Weather Forecast App",
-      description: "Mobile-responsive weather application with location-based forecasts, hourly updates, and beautiful animations.",
-      tags: ["React", "OpenWeather API", "Tailwind", "Geolocation"],
-      image: "/icon.png",
-      link: "https://github.com",
-      demo: "https://example.com"
-    },
-  ];
 
   useEffect(() => {
     if (!isAutoPlay) return;
@@ -108,26 +75,26 @@ export default function Projects() {
   return (
     <section id="projects" className="py-20 px-6 bg-white dark:bg-gray-900 overflow-hidden h-screen">
       <div className="max-w-7xl mx-auto h-full flex flex-col justify-center">
-        <h2 className="text-4xl font-extrabold text-center mb-4 text-gray-900 dark:text-white">Featured Projects</h2>
-        <p className="text-center text-gray-600 dark:text-gray-400 mb-8">A collection of projects that map my growth as a developer — from early experiments to more structured, scalable applications built with intention and curiosity.</p>
+        <h2 className="text-4xl font-extrabold text-center mb-4 text-gray-900 dark:text-white">/projects</h2>
+        <p className="text-center text-gray-600 dark:text-gray-400 mb-8 font-mono">A collection of projects that map my growth as a developer — from early experiments to more structured, scalable applications built with intention and curiosity.</p>
 
         <div 
           className="relative group" 
           onMouseEnter={() => pauseAutoPlay()} 
           onMouseLeave={() => setIsAutoPlay(true)}
         >
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white dark:from-gray-900 to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white dark:from-gray-900 to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white dark:from-gray-900 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white dark:from-gray-900 to-transparent z-10 pointer-events-none" />
 
           <div
             ref={scrollContainerRef}
-            className="flex gap-5 overflow-x-hidden py-5 pl-20 pr-20"
+            className="flex gap-4 overflow-x-hidden py-5 pl-20 pr-20"
             style={{ scrollBehavior: "auto" }}
           >
             {projects.map((project) => (
               <div
                 key={project.title}
-                className="flex-shrink-0 w-[300px] group/card cursor-pointer transition-all duration-500 transform hover:scale-105 h-[400px]"
+                className="flex-shrink-0 w-[300px] group/card cursor-pointer transition-all duration-500 transform hover:scale-105 h-[350px]"
                 onMouseEnter={() => setHoveredCard(project.title)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
@@ -152,13 +119,13 @@ export default function Projects() {
                           {project.tags.slice(0, 2).map((tag) => (
                             <span
                               key={tag}
-                              className="px-3 py-1 bg-white/20 backdrop-blur-md text-white rounded-full text-xs font-semibold border border-white/30"
+                              className="px-3 py-1 bg-white/20 backdrop-blur-md text-white rounded-full text-xs font-mono  border border-white/30"
                             >
                               {tag}
                             </span>
                           ))}
                           {project.tags.length > 2 && (
-                            <span className="px-3 py-1 text-white text-xs font-medium">
+                            <span className="px-3 py-1 text-white text-xs font-medium font-mono">
                               +{project.tags.length - 2}
                             </span>
                           )}
@@ -170,11 +137,11 @@ export default function Projects() {
                   {hoveredCard === project.title && (
                     <div className="absolute inset-0 flex flex-col justify-between p-4 backdrop-blur-md bg-black/40 border border-white/20">
                       <div>
-                        <h3 className="text-xl font-bold text-white mb-4">
+                        <h3 className="text-xl font-bold text-white mb-2">
                           {project.title}
                         </h3>
 
-                        <p className="text-gray-100 text-sm mb-4 leading-relaxed">
+                        <p className="text-gray-100 text-sm mb-4 font-mono">
                           {project.description}
                         </p>
 
@@ -182,7 +149,7 @@ export default function Projects() {
                           {project.tags.map((tag) => (
                             <span
                               key={tag}
-                              className="px-3 py-1 bg-white/20 backdrop-blur-md text-white rounded-full text-xs font-semibold border border-white/30"
+                              className="px-3 py-1 bg-white/20 backdrop-blur-md text-white rounded-full text-xs border border-white/30 font-mono"
                             >
                               {tag}
                             </span>
