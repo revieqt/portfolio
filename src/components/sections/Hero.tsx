@@ -80,6 +80,29 @@ export default function Hero({ setIsGalleryOpen }: HeroProps) {
         .typing-glow {
           text-shadow: 0 0 15px rgba(34, 197, 94, 0.6), 0 0 25px rgba(34, 197, 94, 0.4);
         }
+
+        .hero-overlay {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          background: radial-gradient(
+            ellipse at center,
+            rgba(255, 255, 255, 0) 35%,
+            rgba(255, 255, 255, 0.15) 55%,
+            rgba(255, 255, 255, 0.40) 78%,
+            rgba(255, 255, 255, 0.70) 100%
+          );
+        }
+
+        .dark .hero-overlay {
+          background: radial-gradient(
+            ellipse at center,
+            rgba(0, 0, 0, 0) 35%,
+            rgba(0, 0, 0, 0.40) 55%,
+            rgba(0, 0, 0, 0.70) 78%,
+            rgba(0, 0, 0, 1) 100%
+          );
+        }
         `}
       </style>
 
@@ -108,7 +131,7 @@ export default function Hero({ setIsGalleryOpen }: HeroProps) {
       />
       
       <div 
-        className="absolute inset-0 z-0 bg-cover bg-center opacity-25 grayscale"
+        className="absolute inset-0 z-0 bg-cover bg-center opacity-25 grayscale blur-sm"
         style={{ 
           backgroundImage: `url(/hero-assets/hero_bg.png)`,
         }}
@@ -129,7 +152,7 @@ export default function Hero({ setIsGalleryOpen }: HeroProps) {
             <img
               src="/hero-assets/hero_img.png"
               alt="Hero"
-              className="h-full object-cover drop-shadow-2xl"
+              className="h-full object-cover"
             />
           </div>
 
@@ -147,7 +170,7 @@ export default function Hero({ setIsGalleryOpen }: HeroProps) {
               </h1>
               
 
-              <nav className="flex flex-wrap justify-center gap-3 text-sm sm:text-base">
+              <nav className="flex flex-wrap justify-center gap-3 text-sm sm:text-base font-mono">
                 <a href="#skills" onClick={handleNavClick} className="text-gray-500 text-sm dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">Skills</a>
                 <span className="text-gray-500 dark:text-white/90">·</span>
                 <a href="#certifications" onClick={handleNavClick} className="text-gray-500 text-sm dark:text-white/90 hover:text-pink-500 dark:hover:text-pink-500 transition-colors duration-300">Certifications</a>
@@ -159,10 +182,12 @@ export default function Hero({ setIsGalleryOpen }: HeroProps) {
               
             </div>
           </div>
+          <div className="hero-overlay" />
           <div className="absolute bottom-0 left-0 right-0 h-[100%] bg-gradient-to-b from-transparent via-transparent to-white dark:to-gray-900 pointer-events-none z-30" />
+              
         </div>
 
-        <div className="z-20 w-full px-8 z-50 justify-center items-center bg-gray-900">
+        <div className="z-20 w-full px-8 z-50 justify-center items-center bg-white dark:bg-gray-900 ">
           <p className="text-gray-700 dark:text-white/75 mb-6 leading-relaxed font-mono text-center">
             A Full-Stack Developer with a passion for building practical, user-focused digital experiences. 
           </p>
@@ -176,7 +201,7 @@ export default function Hero({ setIsGalleryOpen }: HeroProps) {
                   <p className="text-base uppercase tracking-widest font-bold text-gray-900 dark:text-white/90 mb-1">
                     10+ Projects
                   </p>
-                  <p className="text-gray-600 dark:text-white/60 text-sm">
+                  <p className="font-mono text-gray-600 dark:text-white/60 text-sm">
                     Built diverse applications from concept to production
                   </p>
                 </div>
@@ -192,7 +217,7 @@ export default function Hero({ setIsGalleryOpen }: HeroProps) {
                   <p className="text-base uppercase tracking-widest font-bold text-gray-900 dark:text-white/90 mb-1">
                     3+ Years
                   </p>
-                  <p className="text-gray-600 dark:text-white/60 text-sm">
+                  <p className="font-mono text-gray-600 dark:text-white/60 text-sm">
                     Dedicated to mastering modern web development
                   </p>
                 </div>
@@ -207,7 +232,7 @@ export default function Hero({ setIsGalleryOpen }: HeroProps) {
                   <p className="text-base uppercase tracking-widest font-bold text-gray-900 dark:text-white/90 mb-1">
                     3+ Clients
                   </p>
-                  <p className="text-gray-600 dark:text-white/60 text-sm">
+                  <p className="font-mono text-gray-600 dark:text-white/60 text-sm">
                     Satisfied partners across various industries
                   </p>
                 </div>
@@ -274,7 +299,7 @@ export default function Hero({ setIsGalleryOpen }: HeroProps) {
                       <p className="text-base uppercase tracking-widest font-bold text-gray-900 dark:text-white/90 mb-1">
                         10+ Projects
                       </p>
-                      <p className="text-gray-600 dark:text-white/60 text-sm">
+                      <p className="font-mono text-gray-600 dark:text-white/60 text-sm">
                         Built diverse applications from concept to production
                       </p>
                     </div>
@@ -290,7 +315,7 @@ export default function Hero({ setIsGalleryOpen }: HeroProps) {
                       <p className="text-base uppercase tracking-widest font-bold text-gray-900 dark:text-white/90 mb-1">
                         3+ Years
                       </p>
-                      <p className="text-gray-600 dark:text-white/60 text-sm">
+                      <p className="font-mono text-gray-600 dark:text-white/60 text-sm">
                         Dedicated to mastering modern web development
                       </p>
                     </div>
@@ -305,7 +330,7 @@ export default function Hero({ setIsGalleryOpen }: HeroProps) {
                       <p className="text-base uppercase tracking-widest font-bold text-gray-900 dark:text-white/90 mb-1">
                         3+ Clients
                       </p>
-                      <p className="text-gray-600 dark:text-white/60 text-sm">
+                      <p className="font-mono text-gray-600 dark:text-white/60 text-sm">
                         Satisfied partners across various industries
                       </p>
                     </div>
@@ -324,6 +349,7 @@ export default function Hero({ setIsGalleryOpen }: HeroProps) {
           </div>
           
         </div>
+        <div className="hero-overlay" />
         <div className="absolute bottom-0 left-0 right-0 h-[100%] bg-gradient-to-b from-transparent via-transparent to-white dark:to-gray-900 pointer-events-none z-30" />
       </div>
         
