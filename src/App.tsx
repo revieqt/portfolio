@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { SunIcon, MoonIcon, ChatBubbleOvalLeftIcon, Bars3Icon } from "@heroicons/react/24/solid";
 import Hero from "./components/sections/Hero";
 import About from "./components/sections/About";
+import Intro from "./components/sections/Intro";
 import Skills from "./components/sections/Skills";
 import Certifications from "./components/sections/Certifications";
 import Projects from "./components/sections/Projects";
@@ -107,7 +108,7 @@ export default function App() {
       `}</style>
 
       <div className="relative z-10">
-        <div className="fixed top-0 right-0 p-4 flex space-x-2 z-40">
+        <div className="fixed top-4 right-4 z-40 flex flex-col items-end gap-2 p-3 rounded-3xl bg-white/10 dark:bg-gray-950/60 border border-white/10 dark:border-white/10 backdrop-blur-xl shadow-2xl">
           <button
             onClick={() => setIsChatOpen(true)}
             className="p-2 rounded-full backdrop-blur-md bg-white/10 dark:bg-white/5 hover:bg-white/20 dark:hover:bg-white/10 transition shadow-lg hover:shadow-xl animate-slide-in button-glow"
@@ -193,6 +194,7 @@ export default function App() {
         </div>
         
         
+        <Intro />
         <Hero />
         <About 
          setIsGalleryOpen={() => setIsGalleryOpen(true)}

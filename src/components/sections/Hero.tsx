@@ -118,6 +118,17 @@ export default function Hero() {
         }}
       />
       <div className="absolute bottom-0 left-0 right-0 h-[100%] bg-gradient-to-b from-transparent via-transparent to-white dark:to-gray-900 pointer-events-none z-30" />
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       <div className="relative h-screen overflow-hidden mx-auto max-w-7xl flex items-center justify-center">
 
         {/* MOBILE */}
@@ -158,25 +169,25 @@ export default function Hero() {
         </div>
 
         <div className="hidden lg:flex relative h-full">
-          <div className="absolute left-0 z-20 flex items-center justify-center h-full mt-20">
+          {/* <div className="absolute left-0 z-20 flex items-center justify-center h-full mt-20">
             <img
               src={heroImg}
               alt="Hero"
               className="h-full w-auto object-contain drop-shadow-2xl"
             />
-          </div>
+          </div> */}
 
-          <div className="ml-auto pr-8 z-10 ml-[280px] flex h-full items-center justify-end">
+          <div className="pr-8 z-10 ml-[280px] flex h-full">
             <div
               className={`transition-all duration-1000 ease-out ${
                 textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
             >
-              <h1 className="text-9xl ml-20 pl-20 font-extrabold uppercase tracking-widest text-gray-900 dark:text-white/90 mb-6 text-right">
+              <h1 className="text-8xl font-extrabold text-gray-900 dark:text-white/90 mb-6">
                 Josh Opsima
               </h1>
-              <div className="ml-20 pl-8">
-                <p className="text-xl text-gray-700 dark:text-white/75 mb-8 leading-relaxed text-right">
+              <div className="">
+                <p className="text-xl text-gray-700 dark:text-white/75 mb-8 leading-relaxed">
                   <span className="font-semibold font-mono text-green-500 typing-glow">{displayText}</span><span className="animate-pulse text-green-500">|</span>  based in the Philippines.
                 </p>
 

@@ -4,21 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import { EnvelopeIcon } from "@heroicons/react/24/solid";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { Fade } from "react-awesome-reveal";
-
-type FormData = { name: string; email: string; message: string };
-
-type HistoryItem =
-  | { type: "prompt"; label: string }
-  | { type: "value"; value: string }
-  | { type: "error"; text: string }
-  | { type: "success"; text: string }
-  | { type: "info"; text: string };
-
-const PROMPTS = [
-  { key: "name" as keyof FormData,    label: "Enter your name",    textarea: false },
-  { key: "email" as keyof FormData,   label: "Enter your email",   textarea: false },
-  { key: "message" as keyof FormData, label: "Enter your message", textarea: true  },
-];
+import type { FormData, HistoryItem } from "@/types/contact";
+import { PROMPTS } from "@/types/contact";
 
 export default function Contact() {
   const [step, setStep] = useState(0);
@@ -26,13 +13,15 @@ export default function Contact() {
   const [form, setForm] = useState<FormData>({ name: "", email: "", message: "" });
   const [inputValue, setInputValue] = useState("");
   const [done, setDone] = useState(false);
+  const [isPromptActive, setIsPromptActive] = useState(false);
   const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!isPromptActive) return;
     inputRef.current?.focus();
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [history, step]);
+  }, [history, step, isPromptActive]);
 
   const isValidEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 
@@ -199,13 +188,18 @@ export default function Contact() {
                         {currentPrompt.label}:
                       </span>
                     </div>
-                    <div className="flex gap-2 items-start">
+                    <div
+                      className="flex gap-2 items-start"
+                      onClick={() => setIsPromptActive(true)}
+                      style={{ cursor: isPromptActive ? "text" : "pointer" }}
+                    >
                       <span className="text-green-400 text-sm shrink-0 font-mono leading-[1.7]">&gt;</span>
                       {currentPrompt.textarea ? (
                         <textarea
                           ref={inputRef as React.RefObject<HTMLTextAreaElement>}
                           rows={1}
                           value={inputValue}
+                          readOnly={!isPromptActive}
                           onChange={(e) => {
                             setInputValue(e.target.value);
                             e.target.style.height = "auto";
@@ -218,7 +212,7 @@ export default function Contact() {
                             }
                           }}
                           className="bg-transparent border-none outline-none text-gray-200 text-sm w-full resize-none overflow-hidden caret-green-400 placeholder-gray-700 font-mono leading-[1.7]"
-                          placeholder="..."
+                          placeholder={isPromptActive ? "..." : "Click to start typing"}
                           style={{ height: "auto" }}
                         />
                       ) : (
@@ -226,10 +220,11 @@ export default function Contact() {
                           ref={inputRef as React.RefObject<HTMLInputElement>}
                           type="text"
                           value={inputValue}
+                          readOnly={!isPromptActive}
                           onChange={(e) => setInputValue(e.target.value)}
                           onKeyDown={(e) => e.key === "Enter" && handleEnter()}
                           className="bg-transparent border-none outline-none text-gray-200 text-sm w-full caret-green-400 placeholder-gray-700 font-mono"
-                          placeholder="..."
+                          placeholder={isPromptActive ? "..." : "Click to start typing"}
                         />
                       )}
                     </div>
