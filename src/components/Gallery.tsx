@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import { galleryItems } from "../constants/gallery";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface GalleryProps {
   onClose: () => void;
@@ -12,6 +13,7 @@ export default function Gallery({ onClose }: GalleryProps) {
   const [displayDescription, setDisplayDescription] = useState("");
   const currentItem = galleryItems[currentIndex];
   const typingTimers = useRef<number[]>([]);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     typingTimers.current.forEach(clearTimeout);
@@ -121,19 +123,22 @@ export default function Gallery({ onClose }: GalleryProps) {
           </div>
         </div>
 
-        <button
-          onClick={handlePrevious}
-          className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-green-500 transition-colors z-20 p-2 bg-black/40 rounded-full hover:bg-black/60"
-        >
-          <ChevronLeftIcon className="w-8 h-8" />
-        </button>
+        {!isMobile && <>
+          <button
+            onClick={handlePrevious}
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-green-500 transition-colors z-20 p-2 bg-black/40 rounded-full hover:bg-black/60"
+          >
+            <ChevronLeftIcon className="w-8 h-8" />
+          </button>
 
-        <button
-          onClick={handleNext}
-          className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-green-500 transition-colors z-20 p-2 bg-black/40 rounded-full hover:bg-black/60"
-        >
-          <ChevronRightIcon className="w-8 h-8" />
-        </button>
+          <button
+            onClick={handleNext}
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-green-500 transition-colors z-20 p-2 bg-black/40 rounded-full hover:bg-black/60"
+          >
+            <ChevronRightIcon className="w-8 h-8" />
+          </button>
+        </>}
+        
       </div>
 
       
