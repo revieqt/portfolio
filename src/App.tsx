@@ -107,7 +107,7 @@ export default function App() {
       `}</style>
 
       <div className="relative z-10">
-        <div className="fixed top-4 right-4 z-40 flex flex-col items-end gap-2 p-3 rounded-3xl bg-white/10 dark:bg-gray-950/60 border border-white/10 dark:border-white/10 backdrop-blur-xl shadow-2xl">
+        <div className="fixed top-4 right-4 z-40 flex items-end gap-2 p-1 rounded-3xl bg-white/10 dark:bg-gray-950/60 border border-white/10 dark:border-white/10 backdrop-blur-xl shadow-2xl">
           <button
             onClick={() => setIsChatOpen(true)}
             className="p-2 rounded-full backdrop-blur-md bg-white/10 dark:bg-white/5 hover:bg-white/20 dark:hover:bg-white/10 transition shadow-lg hover:shadow-xl animate-slide-in button-glow"

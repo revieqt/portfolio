@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import heroImg from "@/assets/images/hero_img.png";
-import heroBg from "@/assets/images/hero_bg.png";
-import { FaCode, FaClock, FaUsers, FaImage } from "react-icons/fa";
+import { FaCode, FaClock, FaUsers } from "react-icons/fa";
 import { Fade } from "react-awesome-reveal";
 import { useIsMobile } from "@/hooks/useIsMobile"
 
@@ -112,7 +110,7 @@ export default function Hero({ setIsGalleryOpen }: HeroProps) {
       <div 
         className="absolute inset-0 z-0 bg-cover bg-center opacity-25 grayscale"
         style={{ 
-          backgroundImage: `url(${heroBg})`,
+          backgroundImage: `url(/hero-assets/hero_bg.png)`,
         }}
       />
       
@@ -129,7 +127,7 @@ export default function Hero({ setIsGalleryOpen }: HeroProps) {
         <div className="lg:hidden relative h-screen flex flex-col justify-between items-center px-4 justify-center mx-auto items-center">
           <div className="absolute inset-0 flex items-center justify-center z-0 mt-20">
             <img
-              src={heroImg}
+              src="/hero-assets/hero_img.png"
               alt="Hero"
               className="h-full object-cover drop-shadow-2xl"
             />
@@ -141,7 +139,7 @@ export default function Hero({ setIsGalleryOpen }: HeroProps) {
                 textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
             >
-              <p className="text-lg text-gray-700 dark:text-white/75 mb-2">
+              <p className="text-gray-700 dark:text-white/75 mb-2">
                 <span className="font-semibold font-mono text-green-600 typing-glow">{displayText}</span><span className="animate-pulse text-green-500">|</span>
               </p>
               <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white/90 mb-4">
@@ -165,9 +163,12 @@ export default function Hero({ setIsGalleryOpen }: HeroProps) {
         </div>
 
         <div className="z-20 w-full px-8 z-50 justify-center items-center bg-gray-900">
+          <p className="text-gray-700 dark:text-white/75 mb-6 leading-relaxed font-mono text-center">
+            A Full-Stack Developer with a passion for building practical, user-focused digital experiences. 
+          </p>
           <div className=" flex-row items-center justify-around gap-6">
             <Fade direction="right" triggerOnce>
-              <div className="mb-2 glow-green flex flex-col items-center text-center gap-4 p-6 rounded-2xl border border-white/30 hover:border-green-400 dark:hover:border-green-400 transition-all duration-300 lg:items-start lg:text-left backdrop-blur-xl bg-gradient-to-br from-white/20 to-white/5 dark:from-white/10 dark:to-white/[0.02] shadow-xl hover:shadow-green-500/20">
+              <div className="mb-4 glow-green flex flex-col items-center text-center gap-4 p-6 rounded-2xl border border-white/30 hover:border-green-400 dark:hover:border-green-400 transition-all duration-300 lg:items-start lg:text-left backdrop-blur-xl bg-gradient-to-br from-white/20 to-white/5 dark:from-white/10 dark:to-white/[0.02] shadow-xl hover:shadow-green-500/20">
                 <div className="text-2xl text-green-500">
                   <FaCode />
                 </div>
@@ -183,7 +184,7 @@ export default function Hero({ setIsGalleryOpen }: HeroProps) {
             </Fade>
             
             <Fade direction="right" delay={100} triggerOnce>
-              <div className="mb-2 glow-green flex flex-col items-center text-center gap-4 p-6 rounded-2xl border border-white/30 hover:border-green-400 dark:hover:border-green-400 transition-all duration-300 lg:items-start lg:text-left backdrop-blur-xl bg-gradient-to-br from-white/20 to-white/5 dark:from-white/10 dark:to-white/[0.02] shadow-xl hover:shadow-green-500/20">
+              <div className="mb-4 glow-green flex flex-col items-center text-center gap-4 p-6 rounded-2xl border border-white/30 hover:border-green-400 dark:hover:border-green-400 transition-all duration-300 lg:items-start lg:text-left backdrop-blur-xl bg-gradient-to-br from-white/20 to-white/5 dark:from-white/10 dark:to-white/[0.02] shadow-xl hover:shadow-green-500/20">
                 <div className="text-2xl text-green-500">
                   <FaClock />
                 </div>
@@ -198,7 +199,7 @@ export default function Hero({ setIsGalleryOpen }: HeroProps) {
               </div>
             </Fade>
             <Fade direction="right" delay={200} triggerOnce>
-              <div className="mb-2 glow-green flex flex-col items-center text-center gap-4 p-6 rounded-2xl border border-white/30 hover:border-green-400 dark:hover:border-green-400 transition-all duration-300 lg:items-start lg:text-left backdrop-blur-xl bg-gradient-to-br from-white/20 to-white/5 dark:from-white/10 dark:to-white/[0.02] shadow-xl hover:shadow-green-500/20">
+              <div className="mb-4 glow-green flex flex-col items-center text-center gap-4 p-6 rounded-2xl border border-white/30 hover:border-green-400 dark:hover:border-green-400 transition-all duration-300 lg:items-start lg:text-left backdrop-blur-xl bg-gradient-to-br from-white/20 to-white/5 dark:from-white/10 dark:to-white/[0.02] shadow-xl hover:shadow-green-500/20">
                 <div className="text-2xl text-green-500">
                   <FaUsers />
                 </div>
@@ -216,7 +217,7 @@ export default function Hero({ setIsGalleryOpen }: HeroProps) {
 
           <button
             onClick={() => setIsGalleryOpen()}
-            className="w-full hover:underline px-4 py-6 rounded-lg font-mono text-sm font-semibold flex items-center justify-center gap-2 text-green-500 "
+            className="w-full hover:underline px-4 pt-4 pb-6 rounded-lg font-mono text-sm font-semibold flex items-center justify-center gap-2 text-green-500 "
           >
             /View Josh's Gallery
           </button>
@@ -256,7 +257,7 @@ export default function Hero({ setIsGalleryOpen }: HeroProps) {
             
             <div className="absolute right-0 z-20 flex items-center justify-center h-full mt-20">
               <img
-                src={heroImg}
+                src="/hero-assets/hero_img.png"
                 alt="Hero"
                 className="h-full w-auto object-contain drop-shadow-2xl"
               />
