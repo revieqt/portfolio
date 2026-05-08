@@ -1,62 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Fade} from "react-awesome-reveal";
-
-type SkillItem = { name: string; percent: number };
-type SkillGroup = { category: string; items: SkillItem[] };
-
-const SKILLS: SkillGroup[] = [
-  {
-    category: "Languages",
-    items: [
-      { name: "Javascript", percent: 90 },
-      { name: "TypeScript", percent: 85 },
-      { name: "Java", percent: 80 },
-      { name: "PHP", percent: 60 },
-      { name: "Python", percent: 35 },
-    ],
-  },
-  {
-    category: "Frontend",
-    items: [
-      { name: "HTML", percent: 90 },
-      { name: "CSS", percent: 95 },
-      { name: "Tailwind CSS", percent: 75 },
-      { name: "React", percent: 80 },
-      { name: "React Native", percent: 90 },
-      { name: "Next.js", percent: 75 },
-    ],
-  },
-  {
-    category: "Backend",
-    items: [
-      { name: "Node.js", percent: 85 },
-      { name: "Express", percent: 82 },
-      { name: "REST APIs", percent: 75 },
-      { name: "MySQL", percent: 90 },
-      { name: "MongoDB", percent: 80 },
-      { name: "Firebase", percent: 75 },
-    ],
-  },
-  {
-    category: "Tools",
-    items: [
-      { name: "Git", percent: 75 },
-      { name: "Docker", percent: 60 },
-      { name: "VS Code", percent: 90 },
-      { name: "Postman", percent: 70 },
-      { name: "Figma", percent: 80 },
-    ],
-  },
-  {
-    category: "Soft Skills",
-    items: [
-      { name: "Communication", percent: 80 },
-      { name: "Teamwork", percent: 85 },
-      { name: "Problem Solving", percent: 80 },
-      { name: "Adaptability", percent: 75 },
-    ],
-  },
-];
+import { SKILLS } from "@/constants/skills";
 
 export default function Skills() {
   const [groupIndex, setGroupIndex] = useState(0);
@@ -164,7 +108,7 @@ export default function Skills() {
           <div className="px-3">
             <h2 className="text-4xl font-extrabold mb-6 text-center lg:text-left">Skills</h2>
 
-            <p className="text-gray-600 dark:text-gray-400 lg:max-w-md mb-8 text-center lg:text-left">
+            <p className="text-gray-600 dark:text-gray-400 lg:max-w-md mb-8 text-center lg:text-left font-mono">
               Every skill here tells a story of growth, exploration, and curiosity. Together, they map the journey I take from concept to execution.
             </p>
 
@@ -189,21 +133,33 @@ export default function Skills() {
             </div>
           </div>
           
-          <div className="relative">
-            <div className="rounded-xl bg-black p-6 font-mono text-sm text-green-400 h-[550px]">
-              <div className="mb-4 flex justify-between text-xs text-green-500">
-                <span>&gt; skills/{categoryText}</span>
-                <div className="flex gap-4">
-                  <button onClick={prev} className="hover:underline">
-                    Previous
-                  </button>
-                  <button onClick={next} className="hover:underline">
-                    Next
-                  </button>
+          <div className="relative overflow-hidden rounded-lg">
+            <div className="bg-black font-mono text-sm text-green-400 h-[550px]">
+              <div className="absolute inset-x-0 z-50 justify-between flex items-center bg-gray-900/95 backdrop-blur-sm px-3 py-3">
+                <div className="flex items-center mr-3">
+                  <div className="flex items-center gap-2 p-1 mr-3">
+                    <span className="h-2 w-2 rounded-full bg-red-500" />
+                    <span className="h-2 w-2 rounded-full bg-yellow-400" />
+                    <span className="h-2 w-2 rounded-full bg-green-500" />
+                  </div>
+                  <div className="text-sm text-white/90 tracking-wide font-mono">
+                    skills/{categoryText}
+                  </div>
+                </div>
+
+                <div className="flex items-center mr-3 text-white/90 ">
+                  <div className="flex gap-4">
+                    <button onClick={prev} className="hover:underline font-mono">
+                      Previous
+                    </button>
+                    <button onClick={next} className="hover:underline font-mono">
+                      Next
+                    </button>
+                  </div>
                 </div>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-4 p-6 pt-16">
                 {lines.map((line, i) => (
                   <div key={i}>
                     <div className="flex justify-between">

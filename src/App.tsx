@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { SunIcon, MoonIcon, ChatBubbleOvalLeftIcon, Bars3Icon } from "@heroicons/react/24/solid";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Skills from "./components/Skills";
-import Certifications from "./components/Certifications";
-import Projects from "./components/Projects";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
-import Chat from "./components/Chat";
-import Gallery from "./components/Gallery";
+import Hero from "./components/sections/Hero";
+import About from "./components/sections/About";
+import Skills from "./components/sections/Skills";
+import Certifications from "./components/sections/Certifications";
+import Projects from "./components/sections/Projects";
+import Contact from "./components/sections/Contact";
+import Footer from "./components/sections/Footer";
+import Chat from "./components/modals/Chat";
+import Gallery from "./components/modals/Gallery";
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(true);

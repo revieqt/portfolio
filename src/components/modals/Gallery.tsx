@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
-import { galleryItems } from "../constants/gallery";
+import { galleryItems } from "../../constants/gallery";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface GalleryProps {
