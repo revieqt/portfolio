@@ -104,8 +104,8 @@ export default function Skills() {
       <div className="absolute bottom-0 left-0 right-0 h-[100%] bg-gradient-to-b from-transparent via-transparent to-white dark:to-gray-900 pointer-events-none z-10" />
       <div className="mx-auto max-w-7xl grid gap-12 lg:grid-cols-2 items-center z-30">
         
-        <div className="px-3">
-          <h2 className="text-4xl font-extrabold mb-6 text-center lg:text-left">/skills</h2>
+        <div className="p-4">
+          <h2 className="text-2xl lg:text-4xl md:text-3xl font-extrabold mb-6 text-center lg:text-left">~/skills</h2>
 
           <p className="text-gray-600 dark:text-gray-400 lg:max-w-md mb-8 text-center lg:text-left font-mono">
             Every skill here tells a story of growth, exploration, and curiosity. Together, they map the journey I take from concept to execution.

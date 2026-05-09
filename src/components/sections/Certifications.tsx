@@ -1,124 +1,216 @@
-import { Fade } from "react-awesome-reveal";
+import { useRef, useState, useEffect } from "react";
+import { certifications, awards } from "@/constants/certifications";
 
 export default function Certifications() {
-  const certifications = [
-    {
-      year: "2025",
-      items: [
-        {
-          title: "Champion, Web Design",
-          issuer: "St. Cecilia's College IT Congress",
-        },
-        {
-          title: "Runner-Up, Computer Programming",
-          issuer: "St. Cecilia's College IT Congress",
-        },
-      ],
-    },
-    {
-      year: "2024",
-      items: [
-        {
-          title: "Basic Fiber Optic Installation Seminar",
-          issuer: "St. Cecilia's College",
-        },
-        {
-          title: "CSS NC II, Competency in Units 1-3",
-          issuer: "TESDA",
-        },
-        {
-          title: "Cebu ICT Congress Seminar",
-          issuer: "PSITE",
-        },
-        {
-          title: "Runner-Up, Computer Programming",
-          issuer: "St. Cecilia's College IT Congress",
-        },
-      ],
-    },
-    {
-      year: "2023",
-      items: [
-        {
-          title: "Dean's Honor Roll",
-          issuer: "St. Cecilia's College",
-        },
-        {
-          title: "Champion, Computer Programming",
-          issuer: "St. Cecilia's College IT Congress",
-        },
-      ],
-    },
-    {
-      year: "2022",
-      items: [
-        {
-          title: "Dean's Honor Roll",
-          issuer: "St. Cecilia's College",
-        },
-      ],
-    }
-  ];
+  const ref = useRef<HTMLDivElement>(null);
+  const [category, setCategory] = useState("certifications");
+  const [currentPage, setCurrentPage] = useState(0);
+  const [categoryText, setCategoryText] = useState("");
+  const [visible, setVisible] = useState(false);
+
+  const itemsPerPage = 9;
+  const data = category === "certifications" ? certifications : awards;
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const startIndex = currentPage * itemsPerPage;
+  const displayedItems = data.slice(startIndex, startIndex + itemsPerPage);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([e]) => setVisible(e.isIntersecting),
+      { threshold: 0.3 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!visible) return;
+
+    let cancelled = false;
+
+    const sleep = (ms: number) =>
+      new Promise((r) => setTimeout(r, ms));
+
+    const run = async () => {
+      setCategoryText("");
+      const text = category === "certifications" ? "certifications" : "awards";
+
+      for (const char of text) {
+        if (cancelled) return;
+        setCategoryText((prev) => prev + char);
+        await sleep(60);
+      }
+    };
+
+    run();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [category, visible]);
+
+  const handleCategoryChange = (newCategory: string) => {
+    setCategory(newCategory);
+    setCurrentPage(0);
+  };
+  
 
   return (
-    <section id="certifications" className="relative py-24 px-4 overflow-hidden">
-      <style>
-        {`
-          .glow-green:hover {
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.6), inset 0 0 20px rgba(34, 197, 94, 0.1);
-          }
-        `}
-      </style>
-
-      <div className="relative z-10 max-w-3xl mx-auto">
-        <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white/90 mb-16 text-center">
-          Certifications & Awards
-        </h2>
-
-        <div className="relative">
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-teal-500/50 to-cyan-500/50 hidden sm:block" />
-          <div className="space-y-12">
-            {certifications.map((yearGroup, index) => {
-              const isEven = index % 2 === 0;
-
-              return (
-                <Fade key={index} direction={isEven ? "right" : "left"} delay={index * 100} triggerOnce>
-                  <div className={`flex ${isEven ? "sm:flex-row-reverse" : "sm:flex-row"} flex-col items-center gap-8`}>
-                    <div className={`w-full sm:w-1/2 ${isEven ? "sm:text-right" : "sm:text-left"} text-center`}>
-                      <div className="glow-green border border-gray-200 dark:border-white/10 rounded-lg p-6 hover:border-green-500 dark:hover:border-green-500 transition-all duration-300">
-                        <p className="text-sm uppercase tracking-widest font-bold text-green-500 mb-4">
-                          {yearGroup.year}
-                        </p>
-                        <div className="space-y-4">
-                          {yearGroup.items.map((cert, certIndex) => (
-                            <div key={certIndex}>
-                              <h3 className="text-base font-bold text-gray-900 dark:text-white/90 mb-2">
-                                {cert.title}
-                              </h3>
-                              <p className="text-sm text-gray-600 dark:text-white/60">
-                                {cert.issuer}
-                              </p>
-                              {certIndex < yearGroup.items.length - 1 && (
-                                <div className="mt-4 border-t border-gray-200 dark:border-white/10" />
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
+    <section
+      id="certifications"
+      ref={ref}
+      className="relative py-20 px-3 lg:h-screen overflow-hidden justify-center items-center flex"
+    >
+      <div className="absolute top-0 left-0 right-0 h-[100%] bg-gradient-to-t from-transparent via-transparent to-white dark:to-gray-900 pointer-events-none z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-[100%] bg-gradient-to-b from-transparent via-transparent to-white dark:to-gray-900 pointer-events-none z-10" />
+      <div className="mx-auto max-w-7xl flex flex-col-reverse lg:flex-row lg:grid lg:grid-cols-2 gap-12 items-center z-30">
+        
+        
+        
+        <div className="w-full">
+          {/* 3x3 Grid */}
+          <div className="grid grid-cols-3 gap-1 mb-8 animate-fade-in">
+            {displayedItems.map((item, index) => (
+              <div
+                key={`${currentPage}-${index}`}
+                className="aspect-square cursor-pointer"
+                style={{
+                  perspective: "1000px",
+                  animationDelay: `${index * 50}ms`,
+                }}
+              >
+                <div
+                  className="relative w-full h-full transition-transform duration-500 transform-gpu hover:rotate-y-180"
+                  style={{
+                    transformStyle: "preserve-3d",
+                    transformOrigin: "center",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.transform = "rotateY(180deg)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.transform = "rotateY(0deg)";
+                  }}
+                >
+                  {/* Front */}
+                  <div
+                    className="absolute w-full h-full bg-gradient-to-br from-green-500/10 to-green-500/5 dark:from-green-900/20 dark:to-green-900/10 border border-green-500/30 dark:border-green-700/40 rounded-lg p-3 flex flex-col justify-between backdrop-blur-sm"
+                    style={{ backfaceVisibility: "hidden" }}
+                  >
+                    <div>
+                      <h3 className="text-xs font-bold text-gray-600 dark:text-white mb-2 lg:mb-3 animate-fade-in">
+                        {item.title}
+                      </h3>
                     </div>
-
-                    <div className="flex-shrink-0 relative">
-                      <div className="w-4 h-4 rounded-full bg-green-500 z-10 border-4 border-white dark:border-gray-900"></div>
+                    <div className="space-y-0.5 lg:space-y-1 text-xs lg:text-xs text-gray-600 dark:text-gray-300">
+                      <p className="font-mono text-green-600 dark:text-green-400 line-clamp-1 text-xs animate-fade-in">{item.issuedBy}</p>
+                      <p className="font-mono text-gray-500 dark:text-gray-400 text-xs animate-fade-in">{item.date}</p>
                     </div>
-
-                    <div className="w-full sm:w-1/2" />
                   </div>
-                </Fade>
-              );
-            })}
+
+                  {/* Back */}
+                  <div
+                    className="absolute w-full h-full bg-gradient-to-br from-green-600/20 to-green-600/10 dark:from-green-900/30 dark:to-green-900/20 border border-green-600/40 dark:border-green-700/50 rounded-lg p-3 flex items-center justify-center backdrop-blur-sm"
+                    style={{
+                      backfaceVisibility: "hidden",
+                      transform: "rotateY(180deg)",
+                    }}
+                  >
+                    <p className="text-xs lg:text-xs text-gray-900 dark:text-gray-100 text-center font-mono animate-fade-in">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+            
+            {/* Placeholder items for remaining grid spaces */}
+            {Array.from({ length: Math.max(0, itemsPerPage - displayedItems.length) }).map((_, index) => (
+              <div
+                key={`placeholder-${index}`}
+                className="aspect-square border border-green-500/20 rounded-lg bg-green-500/5 backdrop-blur-sm"
+              />
+            ))}
           </div>
+
+          {/* Pagination */}
+          <div className={`flex justify-center items-center gap-2 animate-fade-in transition-opacity ${totalPages === 1 ? 'opacity-50' : ''}`}>
+            <button
+              onClick={() => setCurrentPage((p) => Math.max(0, p - 1))}
+              disabled={currentPage === 0}
+              className="px-3 py-2 text-green-400 disabled:opacity-50 disabled:cursor-not-allowed transition font-mono text-sm"
+            >
+              ← Prev
+            </button>
+
+            {Array.from({ length: totalPages }, (_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentPage(i)}
+                className={`px-3 py-2 rounded-lg font-mono text-sm transition ${
+                  currentPage === i
+                    ? "bg-green-500/10 text-green-400 border border-green-500 shadow-[0_0_12px_rgba(34,197,94,0.35)]"
+                    : "border border-green-500/30 text-gray-400 hover:text-green-400 hover:border-green-500/60"
+                }`}
+              >
+                {i + 1}
+              </button>
+            ))}
+
+            <button
+              onClick={() => setCurrentPage((p) => Math.min(totalPages - 1, p + 1))}
+              disabled={currentPage === totalPages - 1}
+              className="px-3 py-2  text-green-400 disabled:opacity-50 disabled:cursor-not-allowed transition font-mono text-sm"
+            >
+              Next →
+            </button>
+          </div>
+        </div>
+        
+        <div className="p-4">
+          <h2 className="text-2xl lg:text-4xl md:text-3xl font-extrabold mb-6 text-center lg:text-left">~/{categoryText}</h2>
+          
+          <div className="flex flex-wrap gap-3 lg:justify-start justify-center mb-6">
+            <button
+              key={'certifications'}
+              onClick={() => handleCategoryChange('certifications')}
+              className={`
+                px-4 py-2 rounded-lg font-mono text-sm transition backdrop-blur-sm
+                border
+                ${
+                  category === 'certifications'
+                    ? "bg-green-500/10 text-green-400 border-green-500 shadow-[0_0_12px_rgba(34,197,94,0.35)]"
+                    : "border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-green-400 hover:text-green-400"
+                }
+              `}
+            >
+              Certifications
+            </button>
+            <button
+              key={'awards'}
+              onClick={() => handleCategoryChange('awards')}
+              className={`
+                px-4 py-2 rounded-lg font-mono text-sm transition backdrop-blur-sm
+                border
+                ${
+                  category === 'awards'
+                    ? "bg-green-500/10 text-green-400 border-green-500 shadow-[0_0_12px_rgba(34,197,94,0.35)]"
+                    : "border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-green-400 hover:text-green-400"
+                }
+              `}
+            >
+              Awards
+            </button>
+          </div>
+          <p className="text-gray-600 dark:text-gray-400 lg:max-w-md text-center lg:text-left font-mono">
+            {category === 'certifications' ? " These certifications represent milestones in my learning journey, each one a testament to the skills I've honed and the knowledge I've gained." 
+            : "These awards are more than just accolades — they represent moments of recognition for my dedication, creativity, and impact in the tech community."}
+          </p>
+
+          
         </div>
       </div>
     </section>
+    
   );
 }

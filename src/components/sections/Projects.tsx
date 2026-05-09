@@ -75,8 +75,8 @@ export default function Projects() {
   return (
     <section id="projects" className="py-20 px-6 bg-white dark:bg-gray-900 overflow-hidden h-screen">
       <div className="max-w-7xl mx-auto h-full flex flex-col justify-center">
-        <h2 className="text-4xl font-extrabold text-center mb-4 text-gray-900 dark:text-white">/projects</h2>
-        <p className="text-center text-gray-600 dark:text-gray-400 mb-8 font-mono">A collection of projects that map my growth as a developer — from early experiments to more structured, scalable applications built with intention and curiosity.</p>
+        <h2 className="text-2xl lg:text-4xl md:text-3xl font-extrabold text-center mb-4 text-gray-900 dark:text-white">~/projects</h2>
+        <p className="text-center text-gray-600 dark:text-gray-400 mb-8 font-mono">A collection of projects that map my growth as a developer — from early experiments to more structured, scalable applications.</p>
 
         <div 
           className="relative group" 

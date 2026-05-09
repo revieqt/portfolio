@@ -92,8 +92,8 @@ export default function Contact() {
 
           {/* Left — info */}
           <div className="px-3 z-30">
-            <h2 className="text-4xl font-extrabold mb-6 text-center lg:text-left">
-              /contact-me
+            <h2 className="text-2xl lg:text-4xl md:text-3xl font-extrabold mb-6 text-center lg:text-left">
+            ~/contact-me
             </h2>
 
             <p className="font-mono text-gray-600 dark:text-gray-400 lg:max-w-md mb-8 text-center lg:text-left">

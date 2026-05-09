@@ -186,7 +186,7 @@ export default function Hero({ setIsGalleryOpen }: HeroProps) {
               
         </div>
 
-        <div className="z-20 w-full px-8 z-50 justify-center items-center bg-white dark:bg-gray-900 ">
+        <div className="z-20 w-full px-8 z-50 justify-center bg-white dark:bg-gray-900 ">
           <p className="text-gray-700 dark:text-white/75 mb-6 leading-relaxed font-mono text-center">
             A Full-Stack Developer with a passion for building practical, user-focused digital experiences. 
           </p>
