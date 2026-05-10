@@ -94,31 +94,28 @@ export default function Certifications() {
                 >
                   {/* Front */}
                   <div
-                    className="absolute w-full h-full bg-gradient-to-br from-green-500/10 to-green-500/5 dark:from-green-900/20 dark:to-green-900/10 border border-green-500/30 dark:border-green-700/40 rounded-lg p-3 flex flex-col justify-between backdrop-blur-sm"
+                    className="absolute w-full h-full bg-gradient-to-br from-green-500/10 to-green-500/5 dark:from-green-900/20 dark:to-green-900/10 border border-green-500/30 dark:border-green-700/40 rounded-lg p-3 flex flex-col justify-center backdrop-blur-sm"
                     style={{ backfaceVisibility: "hidden" }}
                   >
-                    <div>
-                      <h3 className="text-xs font-bold text-gray-600 dark:text-white mb-2 lg:mb-3 animate-fade-in">
-                        {item.title}
-                      </h3>
-                    </div>
-                    <div className="space-y-0.5 lg:space-y-1 text-xs lg:text-xs text-gray-600 dark:text-gray-300">
+                    <h3 className="text-xs font-bold text-gray-600 dark:text-white mb-2 lg:mb-3 animate-fade-in text-center">
+                      {item.title}
+                    </h3>
+                    {/* <div className="space-y-0.5 lg:space-y-1 text-xs lg:text-xs text-gray-600 dark:text-gray-300">
                       <p className="font-mono text-green-600 dark:text-green-400 line-clamp-1 text-xs animate-fade-in">{item.issuedBy}</p>
                       <p className="font-mono text-gray-500 dark:text-gray-400 text-xs animate-fade-in">{item.date}</p>
-                    </div>
+                    </div> */}
                   </div>
 
                   {/* Back */}
                   <div
-                    className="absolute w-full h-full bg-gradient-to-br from-green-600/20 to-green-600/10 dark:from-green-900/30 dark:to-green-900/20 border border-green-600/40 dark:border-green-700/50 rounded-lg p-3 flex items-center justify-center backdrop-blur-sm"
+                    className="absolute w-full h-full text-center bg-gradient-to-br from-green-600/20 to-green-600/10 dark:from-green-900/30 dark:to-green-900/20 border border-green-600/40 dark:border-green-700/50 rounded-lg p-3 items-center justify-center backdrop-blur-sm"
                     style={{
                       backfaceVisibility: "hidden",
                       transform: "rotateY(180deg)",
                     }}
                   >
-                    <p className="text-xs lg:text-xs text-gray-900 dark:text-gray-100 text-center font-mono animate-fade-in">
-                      {item.description}
-                    </p>
+                    <p className="font-mono text-green-600 dark:text-green-400 text-xs animate-fade-in">{item.issuedBy}</p>
+                      <p className="font-mono text-gray-500 dark:text-gray-400 text-xs animate-fade-in">{item.date}</p>
                   </div>
                 </div>
               </div>
